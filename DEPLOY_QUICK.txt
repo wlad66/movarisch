@@ -1,0 +1,106 @@
+═══════════════════════════════════════════════════════
+  🚀 COMANDI RAPIDI PER DEPLOY - MoVaRisCh v2.1.0
+═══════════════════════════════════════════════════════
+
+📌 OPZIONE 1: DEPLOY AUTOMATICO (CONSIGLIATO)
+──────────────────────────────────────────────────────
+cd /c/PROGRAMMAZIONE/movarisch
+./deploy.sh
+
+(Lo script ti guiderà passo passo)
+
+
+📌 OPZIONE 2: DEPLOY MANUALE
+──────────────────────────────────────────────────────
+
+STEP 1 - Verifica .env non sia tracciato
+─────────────────────────────────────────
+git ls-files | grep .env
+
+ATTESO: Nessun output
+SE APPARE .env: FERMARSI! Non committare!
+
+
+STEP 2 - Commit locale
+─────────────────────────────────────────
+git add .
+git commit -m "v2.1.0 - Export completo, Tipologia d'Uso, Classificazione Rischio"
+
+
+STEP 3 - Push a repository remoto
+─────────────────────────────────────────
+git push origin main
+
+
+STEP 4 - Deploy su VPS (SSH)
+─────────────────────────────────────────
+ssh user@your-vps-ip
+
+cd /path/to/movarisch
+
+git pull origin main
+
+docker-compose -f docker-compose.vps.yml down
+
+docker-compose -f docker-compose.vps.yml up -d --build
+
+docker-compose -f docker-compose.vps.yml logs -f
+
+
+STEP 5 - Verifica
+─────────────────────────────────────────
+Apri browser: http://your-vps-ip:8005
+
+✓ Login funziona
+✓ Step 3 ha "Tipologia d'Uso"
+✓ Step 4 mostra tabella classificazione
+✓ Export Word contiene tutti i dati
+
+
+═══════════════════════════════════════════════════════
+  📋 CHECKLIST PRE-DEPLOY
+═══════════════════════════════════════════════════════
+
+☐ Backend in locale funziona (npm start in /server)
+☐ Frontend in locale funziona (npm run dev)
+☐ Export Word funziona correttamente
+☐ Calcoli rischio corretti
+☐ .env NON è tracciato in git
+☐ Backup database fatto (se modifiche struttura)
+
+
+═══════════════════════════════════════════════════════
+  🆘 IN CASO DI PROBLEMI
+═══════════════════════════════════════════════════════
+
+Container non si avvia:
+  docker-compose -f docker-compose.vps.yml logs
+
+Modifiche non visibili:
+  docker-compose -f docker-compose.vps.yml build --no-cache
+  docker-compose -f docker-compose.vps.yml up -d
+
+Rollback:
+  git log --oneline -5
+  git reset --hard <hash-precedente>
+  git push --force origin main
+  (poi rifare deploy sul VPS)
+
+
+═══════════════════════════════════════════════════════
+  📚 DOCUMENTAZIONE
+═══════════════════════════════════════════════════════
+
+Guida completa:      DEPLOY_GUIDE.md
+Modifiche recenti:   CHANGELOG.md
+Documentazione app:  README.md
+
+
+═══════════════════════════════════════════════════════
+  ✅ PRONTO PER IL DEPLOY!
+═══════════════════════════════════════════════════════
+
+Quando sei pronto, esegui:
+  ./deploy.sh
+
+Oppure segui i comandi manuali sopra.

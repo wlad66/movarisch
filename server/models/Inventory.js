@@ -5,14 +5,23 @@ class Inventory {
         const sql = `SELECT * FROM inventory WHERE user_id = $1 ORDER BY id ASC`;
         const result = await pool.query(sql, [userId]);
 
-        return result.rows.map(row => ({
-            id: row.id,
-            name: row.name,
-            cas: row.cas,
-            hCodes: typeof row.hcodes === 'string' ? JSON.parse(row.hcodes) : (row.hcodes || []),
-            riskLevel: row.risklevel,
-            ...(row.additionaldata || {})
-        }));
+        return result.rows.map(row => {
+            let parsedHCodes = row.hcodes || [];
+            if (typeof parsedHCodes === 'string') {
+                parsedHCodes = JSON.parse(parsedHCodes);
+            }
+            if (!Array.isArray(parsedHCodes)) {
+                parsedHCodes = [];
+            }
+            return {
+                id: row.id,
+                name: row.name,
+                cas: row.cas,
+                hCodes: parsedHCodes,
+                riskLevel: row.risklevel,
+                ...(row.additionaldata || {})
+            };
+        });
     }
 
     static async findByCAS(userId, cas) {
@@ -30,17 +39,24 @@ class Inventory {
             userId,
             name,
             cas,
-            hCodes || [],
+            JSON.stringify(hCodes || []),
             riskLevel || 0,
-            additionalData || {}
+            JSON.stringify(additionalData || {})
         ]);
 
         const row = result.rows[0];
+        let parsedHCodes = row.hcodes || [];
+        if (typeof parsedHCodes === 'string') {
+            parsedHCodes = JSON.parse(parsedHCodes);
+        }
+        if (!Array.isArray(parsedHCodes)) {
+            parsedHCodes = [];
+        }
         return {
             id: row.id,
             name: row.name,
             cas: row.cas,
-            hCodes: typeof row.hcodes === 'string' ? JSON.parse(row.hcodes) : (row.hcodes || []),
+            hCodes: parsedHCodes,
             riskLevel: row.risklevel,
             ...(row.additionaldata || {})
         };
@@ -55,9 +71,9 @@ class Inventory {
         const result = await pool.query(sql, [
             name,
             cas,
-            hCodes || [],
+            JSON.stringify(hCodes || []),
             riskLevel || 0,
-            additionalData || {},
+            JSON.stringify(additionalData || {}),
             id,
             userId
         ]);
@@ -65,11 +81,18 @@ class Inventory {
         if (result.rows.length === 0) return null;
 
         const row = result.rows[0];
+        let parsedHCodes = row.hcodes || [];
+        if (typeof parsedHCodes === 'string') {
+            parsedHCodes = JSON.parse(parsedHCodes);
+        }
+        if (!Array.isArray(parsedHCodes)) {
+            parsedHCodes = [];
+        }
         return {
             id: row.id,
             name: row.name,
             cas: row.cas,
-            hCodes: typeof row.hcodes === 'string' ? JSON.parse(row.hcodes) : (row.hcodes || []),
+            hCodes: parsedHCodes,
             riskLevel: row.risklevel,
             ...(row.additionaldata || {})
         };

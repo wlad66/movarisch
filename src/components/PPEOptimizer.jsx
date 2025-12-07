@@ -31,7 +31,18 @@ const PPEOptimizer = ({ savedAssessments = [], onArchive, setEditingAssessment, 
         console.log('Selected gloves IDs:', selectedGloves);
         console.log('PPE Data gloves:', ppeData.gloves);
 
+        // Get workplace and role from the first selected assessment
+        const firstAssessment = selectedChemicals.length > 0
+            ? savedAssessments.find(a => a.cas === selectedChemicals[0])
+            : savedAssessments[0];
+
         const report = {
+            workplace: firstAssessment?.workplace || '',
+            role: firstAssessment?.role || '',
+            assessments: selectedChemicals.map(cas => {
+                const assessment = savedAssessments.find(a => a.cas === cas);
+                return assessment || { cas, name: 'Prodotto chimico' };
+            }),
             chemicals: selectedChemicals.map(cas => {
                 const assessment = savedAssessments.find(a => a.cas === cas);
                 return {

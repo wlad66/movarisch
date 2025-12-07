@@ -156,6 +156,21 @@ const matrixCute = [
 // --- COMPONENTE ARCHIVIO ---
 const ArchiveView = ({ reports, onDelete }) => {
   const { company } = useAuth();
+
+  const groupedReports = React.useMemo(() => {
+    const groups = {};
+    reports.forEach(report => {
+      const workplace = report.workplace || 'Non specificato';
+      const role = report.role || 'Non specificato';
+      const key = `${workplace}___${role}`;
+      if (!groups[key]) {
+        groups[key] = { workplace, role, reports: [] };
+      }
+      groups[key].reports.push(report);
+    });
+    return Object.values(groups);
+  }, [reports]);
+
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
@@ -169,53 +184,77 @@ const ArchiveView = ({ reports, onDelete }) => {
           <p>Nessun report archiviato.</p>
         </div>
       ) : (
-        <div className="space-y-6">
-          {reports.map((report) => (
-            <div key={report.id} className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-              <div className="bg-slate-50 p-4 border-b flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-slate-700">{report.date}</span>
-                </div>
-                <div className="flex items-center gap-2">
+        <div className="space-y-8">
+          {groupedReports.map((group, groupIdx) => (
+            <div key={groupIdx} className="bg-slate-50 rounded-xl p-4 border-2 border-slate-200">
+              <div className="mb-4 pb-3 border-b border-slate-300">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-800">
+                      Luogo di Lavoro: {group.workplace}
+                    </h3>
+                    <p className="text-sm text-slate-600">Mansione: {group.role}</p>
+                    <p className="text-xs text-slate-500 mt-1">{group.reports.length} report archiviati</p>
+                  </div>
                   <button
-                    onClick={() => exportArchivedReport(report, company)}
-                    className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm font-medium border border-blue-200 px-3 py-1 rounded hover:bg-blue-50 transition"
+                    onClick={() => exportCompleteReport(group, company)}
+                    className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition"
                   >
-                    <Download size={14} /> Esporta Docx
+                    <Download size={16} />
+                    Report Completo
                   </button>
-                  {onDelete && (
-                    <button
-                      onClick={() => onDelete(report.id)}
-                      className="text-red-500 hover:text-red-700 text-sm font-medium px-3 py-1"
-                    >
-                      Elimina
-                    </button>
-                  )}
                 </div>
               </div>
-              <div className="p-4 grid md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">Prodotti Valutati</h4>
-                  <ul className="space-y-1">
-                    {report.chemicals.map((chem, idx) => (
-                      <li key={idx} className="text-sm text-slate-700 flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
-                        {chem.name} <span className="text-slate-400 text-xs">({chem.cas})</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">DPI Selezionati</h4>
-                  <ul className="space-y-2">
-                    {report.gloves.map((glove, idx) => (
-                      <li key={idx} className="text-sm bg-green-50 border border-green-100 p-2 rounded text-green-900">
-                        <div className="font-bold">{glove.material} ({glove.thickness})</div>
-                        <div className="text-xs opacity-80">{glove.name}</div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="space-y-4">
+                {group.reports.map((report) => (
+                  <div key={report.id} className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+                    <div className="bg-slate-50 p-3 border-b flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-slate-700">{report.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => exportArchivedReport(report, company)}
+                          className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm font-medium border border-blue-200 px-3 py-1 rounded hover:bg-blue-50 transition"
+                        >
+                          <Download size={14} /> Esporta Docx
+                        </button>
+                        {onDelete && (
+                          <button
+                            onClick={() => onDelete(report.id)}
+                            className="text-red-500 hover:text-red-700 text-sm font-medium px-3 py-1"
+                          >
+                            Elimina
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="p-4 grid md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">Prodotti Valutati</h4>
+                        <ul className="space-y-1">
+                          {report.chemicals.map((chem, idx) => (
+                            <li key={idx} className="text-sm text-slate-700 flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
+                              {chem.name} <span className="text-slate-400 text-xs">({chem.cas})</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">DPI Selezionati</h4>
+                        <ul className="space-y-2">
+                          {report.gloves.map((glove, idx) => (
+                            <li key={idx} className="text-sm bg-green-50 border border-green-100 p-2 rounded text-green-900">
+                              <div className="font-bold">{glove.material} ({glove.thickness})</div>
+                              <div className="text-xs opacity-80">{glove.name}</div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
@@ -250,6 +289,7 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
   const [distance, setDistance] = useState(1);
 
   // Parametri Cute
+  const [dermalUsageType, setDermalUsageType] = useState(2);
   const [dermalContact, setDermalContact] = useState(1);
 
   // Handle Agent Selection
@@ -305,9 +345,9 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
   const calcEInal = I_Val * distance;
 
   const calcECute = useMemo(() => {
-    const row = matrixCute[usageType] || [];
+    const row = matrixCute[dermalUsageType] || [];
     return row[dermalContact] || 1;
-  }, [usageType, dermalContact]);
+  }, [dermalUsageType, dermalContact]);
 
   const calcRInal = pScore * calcEInal;
   const calcRCute = pScore * calcECute;
@@ -424,10 +464,17 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
               {/* Selezione Agente Chimico */}
               <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
                 <label className="block text-sm font-bold text-blue-900 mb-2">Seleziona Agente da Inventario</label>
+                {!selectedWorkplace || !selectedRole ? (
+                  <div className="bg-yellow-50 border border-yellow-300 text-yellow-800 p-3 rounded-lg text-sm mb-4">
+                    <Info size={16} className="inline mr-2" />
+                    Seleziona prima <strong>Luogo di Lavoro</strong> e <strong>Mansione</strong> per poter scegliere l'agente chimico.
+                  </div>
+                ) : null}
                 <select
                   value={selectedAgentId}
                   onChange={handleAgentSelect}
-                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none mb-4"
+                  disabled={!selectedWorkplace || !selectedRole}
+                  className={`w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none mb-4 ${!selectedWorkplace || !selectedRole ? 'bg-gray-100 cursor-not-allowed opacity-60' : ''}`}
                 >
                   <option value="">-- Seleziona o Inserisci Manualmente --</option>
                   {inventory
@@ -584,6 +631,17 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
                 <Info size={16} className="inline mr-2" />
                 Valutazione necessaria se presente rischio cutaneo (es. H312, H317).
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Tipologia d'Uso</label>
+                <select value={dermalUsageType} onChange={(e) => setDermalUsageType(Number(e.target.value))} className="w-full p-2 border rounded">
+                  <option value={0}>Sistema Chiuso</option>
+                  <option value={1}>Inclusione in Matrice</option>
+                  <option value={2}>Uso Controllato</option>
+                  <option value={3}>Uso Dispersivo</option>
+                </select>
+              </div>
+
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-2">Livello Contatto</label>
                 <div className="grid grid-cols-1 gap-3">
@@ -669,6 +727,83 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
                 </div>
               </div>
 
+              {/* Tabella Classificazione Rischio */}
+              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                <div className="bg-slate-100 p-4 border-b">
+                  <h3 className="text-lg font-bold text-slate-800 text-center">CLASSIFICAZIONE DEL RISCHIO</h3>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead className="bg-slate-50 border-b-2 border-slate-200">
+                      <tr>
+                        <th className="p-3 text-left font-bold text-slate-700 whitespace-nowrap">VALORI DI RISCHIO (R)</th>
+                        <th className="p-3 text-left font-bold text-slate-700">CLASSIFICAZIONE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className={`border-b ${calcRCum >= 0.1 && calcRCum < 15 ? 'bg-green-50 ring-2 ring-green-500' : ''}`}>
+                        <td className="p-3 whitespace-nowrap">
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-green-500 rounded flex-shrink-0"></div>
+                            <span className="font-mono font-bold">0,1 ≤ R {'<'} 15</span>
+                          </div>
+                        </td>
+                        <td className="p-3">
+                          <div className="font-bold text-green-700 whitespace-nowrap">Irrilevante per la salute</div>
+                        </td>
+                      </tr>
+                      <tr className={`border-b ${calcRCum >= 15 && calcRCum < 21 ? 'bg-yellow-50 ring-2 ring-yellow-500' : ''}`}>
+                        <td className="p-3 whitespace-nowrap">
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-yellow-400 rounded flex-shrink-0"></div>
+                            <span className="font-mono font-bold">15 ≤ R {'<'} 21</span>
+                          </div>
+                        </td>
+                        <td className="p-3">
+                          <div className="font-bold text-yellow-700 whitespace-nowrap">Intervallo di incertezza</div>
+                          <div className="text-xs text-slate-600 mt-1">È necessario, prima della classificazione in rischio irrilevante per la salute, rivedere con scrupolo l'assegnazione dei vari punteggi, rivedere le misure di prevenzione e protezione adottate e consultare il medico competente per la decisione finale.</div>
+                        </td>
+                      </tr>
+                      <tr className={`border-b ${calcRCum >= 21 && calcRCum <= 40 ? 'bg-orange-50 ring-2 ring-orange-500' : ''}`}>
+                        <td className="p-3 whitespace-nowrap">
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-orange-500 rounded flex-shrink-0"></div>
+                            <span className="font-mono font-bold">21 ≤ R ≤ 40</span>
+                          </div>
+                        </td>
+                        <td className="p-3">
+                          <div className="font-bold text-orange-700 whitespace-nowrap">Rischio superiore al rischio chimico irrilevante per la salute</div>
+                          <div className="text-xs text-slate-600 mt-1">Applicare gli articoli 225, 226, 229 e 230 D. Lgs 81/08 e s.m.i.</div>
+                        </td>
+                      </tr>
+                      <tr className={`border-b ${calcRCum > 40 && calcRCum <= 80 ? 'bg-red-50 ring-2 ring-red-500' : ''}`}>
+                        <td className="p-3 whitespace-nowrap">
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-red-600 rounded flex-shrink-0"></div>
+                            <span className="font-mono font-bold">40 {'<'} R ≤ 80</span>
+                          </div>
+                        </td>
+                        <td className="p-3">
+                          <div className="font-bold text-red-700 whitespace-nowrap">Rischio elevato</div>
+                        </td>
+                      </tr>
+                      <tr className={`${calcRCum > 80 ? 'bg-purple-50 ring-2 ring-purple-500' : ''}`}>
+                        <td className="p-3 whitespace-nowrap">
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 bg-purple-700 rounded flex-shrink-0"></div>
+                            <span className="font-mono font-bold">R {'>'} 80</span>
+                          </div>
+                        </td>
+                        <td className="p-3">
+                          <div className="font-bold text-purple-700 whitespace-nowrap">Rischio grave</div>
+                          <div className="text-xs text-slate-600 mt-1">Riconsiderare il percorso dell'identificazione delle misure di prevenzione e protezione ai fini di una loro eventuale implementazione. Intensificare i controlli quali la sorveglianza sanitaria, la misurazione degli agenti chimici e la periodicità della manutenzione.</div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
               {/* Suggerimento DPI */}
               <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 shadow-sm">
                 <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2 mb-4">
@@ -716,6 +851,7 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
                   setControlType(3);
                   setExposureTime(4);
                   setDistance(1);
+                  setDermalUsageType(2);
                   setDermalContact(1);
                   setStep(1);
                 }} className="flex-1 py-3 border border-slate-300 text-slate-600 rounded-lg font-medium hover:bg-slate-50">Nuova Valutazione</button>
@@ -736,7 +872,13 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
                         controlType,
                         exposureTime,
                         distance,
-                        dermalContact
+                        dermalUsageType,
+                        dermalContact,
+                        calcEInal,
+                        calcECute,
+                        calcRInal,
+                        calcRCute,
+                        calcRCum
                       });
                       alert("Prodotto aggiunto al carrello per l'ottimizzazione!");
                     } else {
@@ -754,6 +896,8 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
                       const assessmentData = {
                         name: agentName,
                         cas: casNumber,
+                        workplace: selectedWorkplace,
+                        role: selectedRole,
                         hCodes: selectedHCodes,
                         pScore,
                         physicalState,
@@ -762,7 +906,13 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
                         controlType,
                         exposureTime,
                         distance,
-                        dermalContact
+                        dermalUsageType,
+                        dermalContact,
+                        calcEInal,
+                        calcECute,
+                        calcRInal,
+                        calcRCute,
+                        calcRCum
                       };
                       console.log('Assessment data:', assessmentData);
                       await exportAssessmentToWord(assessmentData, null);

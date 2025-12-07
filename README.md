@@ -117,7 +117,7 @@ docker-compose -f docker-compose.vps.yml up -d --build
 docker-compose -f docker-compose.vps.yml logs -f
 ```
 
-**Documentazione completa:** [DEPLOY_VPS.md](DEPLOY_VPS.md)
+**Configurazione:** Modifica `server/.env` con le tue credenziali del database.
 
 ---
 
@@ -133,7 +133,7 @@ inventory      # Inventario agenti chimici
 reports        # Valutazioni archiviate
 ```
 
-**Schema completo:** Vedi [DEPLOY_VPS.md - Schema Database](DEPLOY_VPS.md#schema-database-postgresql)
+**Schema completo:** Vedi `server/server.js` per la struttura completa delle tabelle.
 
 ---
 
@@ -215,15 +215,19 @@ movarisch/
 
 ## 📚 Documentazione
 
-### Guide Complete
-- **[DEPLOY_VPS.md](DEPLOY_VPS.md)** - Deploy su VPS con Dokploy/PostgreSQL
-- **[MIGRAZIONE_VPS_SUMMARY.md](MIGRAZIONE_VPS_SUMMARY.md)** - Riepilogo modifiche server
-- **[MATRICI_MOVARISCH.md](MATRICI_MOVARISCH.md)** - Algoritmo matrici di rischio
+### Codice Sorgente
+- **`App.jsx`** - Componente principale dell'applicazione
+- **`src/components/`** - Tutti i componenti React
+- **`src/utils/exportToWord.js`** - Generazione report Word
+- **`server/server.js`** - API backend e schema database
+- **`server/models/`** - Modelli database
+- **`server/controllers/`** - Controller API
 
-### Guide Tecniche (Archivio)
-- [DOCUMENTAZIONE.md](DOCUMENTAZIONE.md) - Documentazione tecnica completa
-- [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md) - Integrazione componenti
-- [DATABASE_GENERATOR_README.md](DATABASE_GENERATOR_README.md) - Generazione database PPE
+### Algoritmo MoVaRisCh
+L'applicazione implementa l'algoritmo MoVaRisCh per la valutazione del rischio chimico:
+- 5 matrici di rischio interattive
+- Calcolo automatico R_inal, R_cute, R_cum
+- Classificazione del rischio secondo D.Lgs 81/08
 
 ---
 
@@ -347,14 +351,14 @@ Proprietario - Safety Pro Suite
 ## 👥 Supporto
 
 ### Documentazione
-- Guida deploy: [DEPLOY_VPS.md](DEPLOY_VPS.md)
 - FAQ: Vedi sezione Troubleshooting sopra
+- Codice sorgente commentato in `src/` e `server/`
 
 ### Problemi
 Per segnalare problemi:
 1. Controlla logs: `docker-compose -f docker-compose.vps.yml logs -f`
 2. Verifica configurazione `.env`
-3. Consulta [DEPLOY_VPS.md - Troubleshooting](DEPLOY_VPS.md#troubleshooting)
+3. Consulta la sezione Troubleshooting sopra
 
 ---
 
@@ -371,7 +375,7 @@ cp server/.env.example server/.env
 docker-compose -f docker-compose.vps.yml up -d --build
 ```
 
-**Per istruzioni complete:** [DEPLOY_VPS.md](DEPLOY_VPS.md)
+**Configurazione:** Modifica `server/.env` con le credenziali del database prima del deploy.
 
 ---
 

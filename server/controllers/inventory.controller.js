@@ -3,6 +3,14 @@ const Inventory = require('../models/Inventory');
 async function getAll(req, res) {
     try {
         const inventory = await Inventory.findByUserId(req.user.id);
+        console.log('📦 Inventory data:', JSON.stringify(inventory.map(item => ({
+            id: item.id,
+            name: item.name,
+            hCodesType: typeof item.hCodes,
+            hCodesIsArray: Array.isArray(item.hCodes),
+            hCodesLength: item.hCodes?.length,
+            hCodesFirst: item.hCodes?.[0]
+        })), null, 2));
         res.json(inventory);
     } catch (error) {
         console.error('Get inventory error:', error);
