@@ -7,9 +7,71 @@ import DataManagement from './src/components/DataManagement';
 import { AlertTriangle, Wind, Hand, Activity, Info, RotateCcw, FileText, CheckCircle, AlertOctagon, Shield, Database, Download, ChevronDown } from 'lucide-react';
 import PPEOptimizer from './src/components/PPEOptimizer';
 import ppeData from './src/data/ppe_database.json';
-import hCodes from './src/data/hCodes';
 import { Matrix1QuantityUse, Matrix2UsageType, Matrix3ControlType, Matrix4ExposureTime, Matrix5DermalExposure } from './src/components/RiskMatrices';
 import { exportCompleteReport, exportAssessmentToWord, exportArchivedReport } from './src/utils/exportToWord';
+
+// H-Codes array - defined inline to avoid Vite bundling issues
+const hCodes = [
+  { code: "EUH029", text: "A contatto con l'acqua libera un gas tossico", score: 3.00 },
+  { code: "EUH031", text: "A contatto con acidi libera gas tossico", score: 3.00 },
+  { code: "EUH032", text: "A contatto con acidi libera gas molto tossico", score: 3.50 },
+  { code: "EUH066", text: "L'esposizione ripetuta può provocare secchezza e screpolature della pelle", score: 2.50 },
+  { code: "EUH070", text: "Tossico per contatto oculare", score: 6.00 },
+  { code: "EUH071", text: "Corrosivo per le vie respiratorie", score: 6.50 },
+  { code: "EUH201", text: "Contiene Piombo. Non utilizzare su oggetti che possono essere masticati o succhiati dai bambini", score: 6.00 },
+  { code: "EUH201A", text: "Attenzione! Contiene Piombo", score: 6.00 },
+  { code: "EUH202", text: "Cianoacrilato. Pericolo. Incolla la pelle e gli occhi in pochi secondi", score: 4.50 },
+  { code: "EUH203", text: "Contiene Cromo (VI). Può provocare una reazione allergica", score: 4.50 },
+  { code: "EUH204", text: "Contiene Isocianati. Può provocare una reazione allergica", score: 7.00 },
+  { code: "EUH205", text: "Contiene Composti Epossidici. Può provocare una reazione allergica", score: 4.50 },
+  { code: "EUH206", text: "Attenzione! Non utilizzare in combinazione con altri prodotti. Possono formarsi gas pericolosi (cloro)", score: 3.00 },
+  { code: "EUH207", text: "Attenzione! Contiene Cadmio. Durante l'uso si sviluppano fumi pericolosi", score: 8.00 },
+  { code: "EUH208", text: "Contiene Nome sostanza sensibilizzante. Può provocare una reazione allergica", score: 4.00 },
+  { code: "EUH211", text: "Attenzione! In caso di vaporizzazione possono formarsi goccioline respirabili pericolose", score: 5.50 },
+  { code: "EUH212", text: "Attenzione! In caso di utilizzo possono formarsi polveri respirabili pericolose", score: 5.50 },
+  { code: "EUH380", text: "Può interferire con il sistema endocrino negli esseri umani", score: 10.00 },
+  { code: "EUH381", text: "Sospettato di interferire con il sistema endocrino negli esseri umani", score: 8.00 },
+  { code: "H300 cat.1", text: "Letale se ingerito (Cat 1)", score: 3.00 },
+  { code: "H300 cat.2", text: "Letale se ingerito (Cat 2)", score: 2.50 },
+  { code: "H301", text: "Tossico se ingerito", score: 2.25 },
+  { code: "H302", text: "Nocivo se ingerito", score: 2.00 },
+  { code: "H304", text: "Può essere letale in caso di ingestione e di penetrazione nelle vie respiratorie", score: 5.00 },
+  { code: "H310 cat.1", text: "Letale a contatto con la pelle (Cat 1)", score: 6.50 },
+  { code: "H310 cat.2", text: "Letale a contatto con la pelle (Cat 2)", score: 5.50 },
+  { code: "H311", text: "Tossico a contatto con la pelle", score: 4.50 },
+  { code: "H312", text: "Nocivo a contatto con la pelle", score: 3.00 },
+  { code: "H314 cat.1A", text: "Provoca gravi ustioni cutanee e gravi lesioni oculari (1A)", score: 6.25 },
+  { code: "H314 cat.1B", text: "Provoca gravi ustioni cutanee e gravi lesioni oculari (1B)", score: 5.75 },
+  { code: "H314 cat.1C", text: "Provoca gravi ustioni cutanee e gravi lesioni oculari (1C)", score: 5.50 },
+  { code: "H315", text: "Provoca irritazione cutanea", score: 2.50 },
+  { code: "H317 cat.1A", text: "Può provocare una reazione allergica della pelle (1A)", score: 6.00 },
+  { code: "H317 cat.1B", text: "Può provocare una reazione allergica della pelle (1B)", score: 4.50 },
+  { code: "H318", text: "Provoca gravi lesioni oculari", score: 4.50 },
+  { code: "H319", text: "Provoca grave irritazione oculare", score: 3.00 },
+  { code: "H330 cat.1", text: "Letale se inalato (Cat 1)", score: 8.50 },
+  { code: "H330 cat.2", text: "Letale se inalato (Cat 2)", score: 7.50 },
+  { code: "H331", text: "Tossico se inalato", score: 6.00 },
+  { code: "H332", text: "Nocivo se inalato", score: 4.50 },
+  { code: "H334 cat.1A", text: "Può provocare sintomi allergici o asmatici o difficoltà respiratorie se inalato (1A)", score: 9.00 },
+  { code: "H334 cat.1B", text: "Può provocare sintomi allergici o asmatici o difficoltà respiratorie se inalato (1B)", score: 8.00 },
+  { code: "H335", text: "Può irritare le vie respiratorie", score: 3.25 },
+  { code: "H336", text: "Può provocare sonnolenza o vertigini", score: 3.50 },
+  { code: "H341", text: "Sospettato di provocare alterazioni genetiche", score: 8.00 },
+  { code: "H350/H350i", text: "Può provocare il cancro (Cat 1A/1B)", score: 10.00 },
+  { code: "H351", text: "Sospettato di provocare il cancro", score: 8.00 },
+  { code: "H360", text: "Può nuocere alla fertilità o al feto (Cat 1A/1B)", score: 10.00 },
+  { code: "H361", text: "Sospettato di nuocere alla fertilità o al feto", score: 8.00 },
+  { code: "H361d", text: "Sospettato di nuocere al feto", score: 7.50 },
+  { code: "H361f", text: "Sospettato di nuocere alla fertilità", score: 7.50 },
+  { code: "H361fd", text: "Sospettato di nuocere alla fertilità. Sospettato di nuocere al feto", score: 8.00 },
+  { code: "H362", text: "Può essere nocivo per i lattanti allattati al seno", score: 6.00 },
+  { code: "H370", text: "Provoca danni agli organi (STOT SE 1)", score: 9.50 },
+  { code: "H371", text: "Può provocare danni agli organi (STOT SE 2)", score: 8.00 },
+  { code: "H372", text: "Provoca danni agli organi in caso di esposizione prolungata o ripetuta (STOT RE 1)", score: 8.00 },
+  { code: "H373", text: "Può provocare danni agli organi in caso di esposizione prolungata o ripetuta (STOT RE 2)", score: 7.00 },
+  { code: "No H - Limite", text: "Sostanza con Valore Limite Esposizione", score: 3.00 },
+  { code: "No Pericolo", text: "Nessuna classificazione pericolosa", score: 1.00 }
+];
 
 // --- COMPONENTE PER LA GESTIONE DEGLI ERRORI (ERROR BOUNDARY) ---
 class ErrorBoundary extends React.Component {
