@@ -9,7 +9,7 @@ class Inventory {
             id: row.id,
             name: row.name,
             cas: row.cas,
-            hCodes: row.hcodes || [],
+            hCodes: typeof row.hcodes === 'string' ? JSON.parse(row.hcodes) : (row.hcodes || []),
             riskLevel: row.risklevel,
             ...(row.additionaldata || {})
         }));
@@ -40,7 +40,7 @@ class Inventory {
             id: row.id,
             name: row.name,
             cas: row.cas,
-            hCodes: row.hcodes || [],
+            hCodes: typeof row.hcodes === 'string' ? JSON.parse(row.hcodes) : (row.hcodes || []),
             riskLevel: row.risklevel,
             ...(row.additionaldata || {})
         };
@@ -69,7 +69,7 @@ class Inventory {
             id: row.id,
             name: row.name,
             cas: row.cas,
-            hCodes: row.hcodes || [],
+            hCodes: typeof row.hcodes === 'string' ? JSON.parse(row.hcodes) : (row.hcodes || []),
             riskLevel: row.risklevel,
             ...(row.additionaldata || {})
         };
