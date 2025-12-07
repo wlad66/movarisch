@@ -455,7 +455,7 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
               <div>
                 <label className="block text-sm font-medium mb-2">Seleziona Frasi H</label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-60 overflow-y-auto border p-2 rounded bg-slate-50">
-                  {hCodes.map((h) => (
+                  {(Array.isArray(hCodes) ? hCodes : []).map((h) => (
                     <div
                       key={h.code}
                       onClick={() => toggleHCode(h)}
