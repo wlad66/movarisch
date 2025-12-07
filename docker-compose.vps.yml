@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  movarisch-app:
+    build: .
+    ports:
+      # IMPORTANTE: Cambia questa porta se 8005 è già in uso sulla tua VPS
+      - "8005:80"
+    restart: always
+    container_name: movarisch-app
+    depends_on:
+      - movarisch-backend
+    environment:
+      - NODE_ENV=production
+    networks:
+      - movarisch-network
+
+  movarisch-backend:
+    build: ./server
+    ports:
+      # IMPORTANTE: Cambia questa porta se 3001 è già in uso sulla tua VPS
+      - "3001:3000"
+    restart: always
+    container_name: movarisch-backend
+    env_file:
+      - ./server/.env
+    environment:
+      - NODE_ENV=production
+      # Se usi PostgreSQL esistente sulla VPS, imposta queste variabili:
+      # - DB_HOST=host.docker.internal  (per connettersi al PostgreSQL dell'host)
+      # Oppure usa il nome del servizio se PostgreSQL è in Docker
+    networks:
+      - movarisch-network
+    # Rimuovi il volume SQLite se usi PostgreSQL
+    # volumes:
+    #   - ./server/movarisch.db:/app/movarisch.db
+
+networks:
+  movarisch-network:
+    driver: bridge
+
+# NOTA PER DOKPLOY:
+# Se stai usando Dokploy, probabilmente non hai bisogno di questo file.
+# Dokploy gestisce i container automaticamente.
+#
+# Per connettersi al PostgreSQL di Dokploy:
+# 1. Crea un database PostgreSQL in Dokploy
+# 2. Usa le credenziali fornite da Dokploy nel file .env
+# 3. Imposta DB_HOST al nome del servizio PostgreSQL di Dokploy

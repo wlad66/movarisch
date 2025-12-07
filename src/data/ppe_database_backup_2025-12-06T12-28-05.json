@@ -1,0 +1,3336 @@
+{
+  "chemicals": [
+    {
+      "cas": "123-75-1",
+      "name": "Azacyclopentane",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "110-86-1",
+      "name": "Azine",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "108-31-6",
+      "name": "ANODRIDE TOXILICA",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "1336-21-6",
+      "name": "Ammonia aqueous sol. (33%)",
+      "percentage": 33,
+      "state": "L"
+    },
+    {
+      "cas": "7664-41-7",
+      "name": "Ammonia anhydrous",
+      "percentage": 100,
+      "state": "G"
+    },
+    {
+      "cas": "1336-21-6",
+      "name": "Ammonia aqueous sol. (35%)",
+      "percentage": 35,
+      "state": "L"
+    },
+    {
+      "cas": "108-91-8",
+      "name": "Amminocicloesano",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "1336-21-6",
+      "name": "Ammonia aqueous sol. (25%)",
+      "percentage": 25,
+      "state": "L"
+    },
+    {
+      "cas": "1336-21-6",
+      "name": "Ammonia aqueous sol. (10%)",
+      "percentage": 10,
+      "state": "L"
+    },
+    {
+      "cas": "62-53-3",
+      "name": "Amminobenzene",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "100-44-7",
+      "name": "alfa-clorotulene",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "67-56-1",
+      "name": "Alcol metilico",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "71-36-3",
+      "name": "alcol butilico",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "107-13-1",
+      "name": "Acrilonitrile",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "107-18-6",
+      "name": "Alcol allilico",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "107-21-1",
+      "name": "ALCOL ETILENICO",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "64-17-5",
+      "name": "alcol denaturato",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "7722-84-1",
+      "name": "Albone (Hydrogen Peroxide 30%)",
+      "percentage": 30,
+      "state": "L"
+    },
+    {
+      "cas": "7697-37-2",
+      "name": "Acquaforte (Nitric Acid 65%)",
+      "percentage": 65,
+      "state": "L"
+    },
+    {
+      "cas": "75-05-8",
+      "name": "ACN (Acetonitrile)",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "7664-93-9",
+      "name": "acido solforico (99%)",
+      "percentage": 99,
+      "state": "L"
+    },
+    {
+      "cas": "75-98-9",
+      "name": "Acido trimetilacetico",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "7664-93-9",
+      "name": "acido solforico (50%)",
+      "percentage": 50,
+      "state": "L"
+    },
+    {
+      "cas": "7664-38-2",
+      "name": "Acido ortofosforico (85%)",
+      "percentage": 85,
+      "state": "L"
+    },
+    {
+      "cas": "76-03-9",
+      "name": "Acido tricloroacetico",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "77-78-1",
+      "name": "acido solforico (Dimethyl Sulfate)",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "7697-37-2",
+      "name": "Acido nitrico fumante (bianco)",
+      "percentage": 100,
+      "state": "G"
+    },
+    {
+      "cas": "8014-95-7",
+      "name": "Acido solforico fumante",
+      "percentage": 100,
+      "state": "G"
+    },
+    {
+      "cas": "7647-01-0",
+      "name": "Acido muriatico (HCl 37%)",
+      "percentage": 37,
+      "state": "L"
+    },
+    {
+      "cas": "1333-82-0",
+      "name": "acido di cromo (50%)",
+      "percentage": 50,
+      "state": "L"
+    },
+    {
+      "cas": "64-18-6",
+      "name": "Acido carbossilico di idrogeno (Formic 98%)",
+      "percentage": 98,
+      "state": "L"
+    },
+    {
+      "cas": "79-09-4",
+      "name": "ACIDO ETILFORMICO",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "1319-77-3",
+      "name": "Acido cresilico",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "64-18-6",
+      "name": "ACIDO CARBOSSILICO DI IDROGENO (Formic 90%)",
+      "percentage": 90,
+      "state": "L"
+    },
+    {
+      "cas": "7790-94-5",
+      "name": "Acido clorosolfonico",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "7697-37-2",
+      "name": "acido azotico (Nitric Acid 70%)",
+      "percentage": 70,
+      "state": "L"
+    },
+    {
+      "cas": "144-62-7",
+      "name": "Acido etandioico",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "141-78-6",
+      "name": "Acetic Ester",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "79-10-7",
+      "name": "Acido acrilico",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "108-24-7",
+      "name": "ACETYL ANHYDRIDE",
+      "percentage": 100,
+      "state": "S"
+    },
+    {
+      "cas": "64-19-7",
+      "name": "Acetic acid (50%)",
+      "percentage": 50,
+      "state": "L"
+    },
+    {
+      "cas": "64-19-7",
+      "name": "Acido acetico glaciale (100%)",
+      "percentage": 100,
+      "state": "L"
+    },
+    {
+      "cas": "75-07-0",
+      "name": "Acetaldeide",
+      "percentage": 100,
+      "state": "L"
+    }
+  ],
+  "gloves": [
+    {
+      "id": "g1",
+      "name": "AlphaTec 02-100",
+      "material": "LLDPE Laminate",
+      "thickness": "5-layer"
+    },
+    {
+      "id": "g2",
+      "name": "AlphaTec Solvex 37-675",
+      "material": "Nitrile",
+      "thickness": "0.38 mm"
+    },
+    {
+      "id": "g3",
+      "name": "AlphaTec 38-001",
+      "material": "Butyl",
+      "thickness": "0.35 mm"
+    },
+    {
+      "id": "g4",
+      "name": "AlphaTec 39-122.124",
+      "material": "Nitrile",
+      "thickness": "0.38 mm"
+    },
+    {
+      "id": "g5",
+      "name": "AlphaTec 53-002.003",
+      "material": "Neoprene",
+      "thickness": "0.46 mm"
+    },
+    {
+      "id": "g6",
+      "name": "AlphaTec 58-270",
+      "material": "Viton",
+      "thickness": "0.40 mm"
+    },
+    {
+      "id": "g7",
+      "name": "AlphaTec 58-530.535",
+      "material": "Viton",
+      "thickness": "0.65 mm"
+    },
+    {
+      "id": "g8",
+      "name": "DermaShield 73-701.711.721",
+      "material": "Latex/Nitrile",
+      "thickness": "0.30 mm"
+    },
+    {
+      "id": "g9",
+      "name": "TouchNTuff 92-600.605.93-300.700",
+      "material": "Nitrile",
+      "thickness": "0.10 mm"
+    },
+    {
+      "id": "g10",
+      "name": "MICROFLEX 93-260.360",
+      "material": "Nitrile",
+      "thickness": "0.15 mm"
+    }
+  ],
+  "performance": [
+    {
+      "cas": "123-75-1",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "123-75-1",
+      "gloveId": "g2",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "123-75-1",
+      "gloveId": "g3",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "123-75-1",
+      "gloveId": "g4",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "123-75-1",
+      "gloveId": "g5",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "123-75-1",
+      "gloveId": "g6",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "123-75-1",
+      "gloveId": "g7",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "123-75-1",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "123-75-1",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "123-75-1",
+      "gloveId": "g10",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "110-86-1",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "110-86-1",
+      "gloveId": "g2",
+      "time": "10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "110-86-1",
+      "gloveId": "g3",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "110-86-1",
+      "gloveId": "g4",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "110-86-1",
+      "gloveId": "g5",
+      "time": "323",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "110-86-1",
+      "gloveId": "g6",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "110-86-1",
+      "gloveId": "g7",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "110-86-1",
+      "gloveId": "g8",
+      "time": "1",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "110-86-1",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "110-86-1",
+      "gloveId": "g10",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "108-31-6",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-31-6",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-31-6",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-31-6",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-31-6",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-31-6",
+      "gloveId": "g6",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-31-6",
+      "gloveId": "g7",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-31-6",
+      "gloveId": "g8",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-31-6",
+      "gloveId": "g9",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-31-6",
+      "gloveId": "g10",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g1",
+      "time": "N.A.",
+      "color": "gray",
+      "percentage": 33
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g2",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 33
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 33
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g4",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 33
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 33
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g6",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 33
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g7",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 33
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 33
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 33
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g10",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 33
+    },
+    {
+      "cas": "7664-41-7",
+      "gloveId": "g1",
+      "time": "24",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7664-41-7",
+      "gloveId": "g2",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 100
+    },
+    {
+      "cas": "7664-41-7",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "7664-41-7",
+      "gloveId": "g4",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "7664-41-7",
+      "gloveId": "g5",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "7664-41-7",
+      "gloveId": "g6",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "7664-41-7",
+      "gloveId": "g7",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "7664-41-7",
+      "gloveId": "g8",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7664-41-7",
+      "gloveId": "g9",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7664-41-7",
+      "gloveId": "g10",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g1",
+      "time": "N.A.",
+      "color": "gray",
+      "percentage": 35
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g2",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 35
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 35
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g4",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 35
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g5",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 35
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g6",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 35
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g7",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 35
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 35
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 35
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g10",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 35
+    },
+    {
+      "cas": "108-91-8",
+      "gloveId": "g1",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-91-8",
+      "gloveId": "g2",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "108-91-8",
+      "gloveId": "g3",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "108-91-8",
+      "gloveId": "g4",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "108-91-8",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-91-8",
+      "gloveId": "g6",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "108-91-8",
+      "gloveId": "g7",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "108-91-8",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "108-91-8",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "108-91-8",
+      "gloveId": "g10",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g1",
+      "time": "15",
+      "color": "red",
+      "percentage": 25
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g2",
+      "time": "232",
+      "color": "yellow",
+      "percentage": 25
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 25
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g4",
+      "time": "31",
+      "color": "orange",
+      "percentage": 25
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 25
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g6",
+      "time": "181",
+      "color": "yellow",
+      "percentage": 25
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g7",
+      "time": "288",
+      "color": "green",
+      "percentage": 25
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g8",
+      "time": "26",
+      "color": "red",
+      "percentage": 25
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g9",
+      "time": "26",
+      "color": "red",
+      "percentage": 25
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g10",
+      "time": "51",
+      "color": "orange",
+      "percentage": 25
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g1",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 10
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 10
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g3",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 10
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 10
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g5",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 10
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g6",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 10
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g7",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 10
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g8",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 10
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g9",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 10
+    },
+    {
+      "cas": "1336-21-6",
+      "gloveId": "g10",
+      "time": "N.A.",
+      "color": "gray",
+      "percentage": 10
+    },
+    {
+      "cas": "62-53-3",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "62-53-3",
+      "gloveId": "g2",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "62-53-3",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "62-53-3",
+      "gloveId": "g4",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "62-53-3",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "62-53-3",
+      "gloveId": "g6",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "62-53-3",
+      "gloveId": "g7",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "62-53-3",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "62-53-3",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "62-53-3",
+      "gloveId": "g10",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "100-44-7",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "100-44-7",
+      "gloveId": "g2",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "100-44-7",
+      "gloveId": "g3",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "100-44-7",
+      "gloveId": "g4",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "100-44-7",
+      "gloveId": "g5",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "100-44-7",
+      "gloveId": "g6",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "100-44-7",
+      "gloveId": "g7",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "100-44-7",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "100-44-7",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "100-44-7",
+      "gloveId": "g10",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "67-56-1",
+      "gloveId": "g1",
+      "time": "170",
+      "color": "yellow",
+      "percentage": 100
+    },
+    {
+      "cas": "67-56-1",
+      "gloveId": "g2",
+      "time": "28",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "67-56-1",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "67-56-1",
+      "gloveId": "g4",
+      "time": "4",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "67-56-1",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "67-56-1",
+      "gloveId": "g6",
+      "time": "21",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "67-56-1",
+      "gloveId": "g7",
+      "time": "56",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "67-56-1",
+      "gloveId": "g8",
+      "time": "18",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "67-56-1",
+      "gloveId": "g9",
+      "time": "4",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "67-56-1",
+      "gloveId": "g10",
+      "time": "22",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "71-36-3",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "71-36-3",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "71-36-3",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "71-36-3",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "71-36-3",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "71-36-3",
+      "gloveId": "g6",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "71-36-3",
+      "gloveId": "g7",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "71-36-3",
+      "gloveId": "g8",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "71-36-3",
+      "gloveId": "g9",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "71-36-3",
+      "gloveId": "g10",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-13-1",
+      "gloveId": "g1",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "107-13-1",
+      "gloveId": "g2",
+      "time": "51",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "107-13-1",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-13-1",
+      "gloveId": "g4",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "107-13-1",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-13-1",
+      "gloveId": "g6",
+      "time": "6",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "107-13-1",
+      "gloveId": "g7",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "107-13-1",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "107-13-1",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "107-13-1",
+      "gloveId": "g10",
+      "time": "3",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "107-18-6",
+      "gloveId": "g1",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-18-6",
+      "gloveId": "g2",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "107-18-6",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-18-6",
+      "gloveId": "g4",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "107-18-6",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-18-6",
+      "gloveId": "g6",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "107-18-6",
+      "gloveId": "g7",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "107-18-6",
+      "gloveId": "g8",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "107-18-6",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "107-18-6",
+      "gloveId": "g10",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "107-21-1",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-21-1",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-21-1",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-21-1",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-21-1",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-21-1",
+      "gloveId": "g6",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-21-1",
+      "gloveId": "g7",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-21-1",
+      "gloveId": "g8",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-21-1",
+      "gloveId": "g9",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "107-21-1",
+      "gloveId": "g10",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "64-17-5",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "64-17-5",
+      "gloveId": "g2",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "64-17-5",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "64-17-5",
+      "gloveId": "g4",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "64-17-5",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "64-17-5",
+      "gloveId": "g6",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "64-17-5",
+      "gloveId": "g7",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "64-17-5",
+      "gloveId": "g8",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "64-17-5",
+      "gloveId": "g9",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "64-17-5",
+      "gloveId": "g10",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "7722-84-1",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 30
+    },
+    {
+      "cas": "7722-84-1",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 30
+    },
+    {
+      "cas": "7722-84-1",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 30
+    },
+    {
+      "cas": "7722-84-1",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 30
+    },
+    {
+      "cas": "7722-84-1",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 30
+    },
+    {
+      "cas": "7722-84-1",
+      "gloveId": "g6",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 30
+    },
+    {
+      "cas": "7722-84-1",
+      "gloveId": "g7",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 30
+    },
+    {
+      "cas": "7722-84-1",
+      "gloveId": "g8",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 30
+    },
+    {
+      "cas": "7722-84-1",
+      "gloveId": "g9",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 30
+    },
+    {
+      "cas": "7722-84-1",
+      "gloveId": "g10",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 30
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 65
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 65
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 65
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g4",
+      "time": "62",
+      "color": "orange",
+      "percentage": 65
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 65
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g6",
+      "time": "62",
+      "color": "orange",
+      "percentage": 65
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g7",
+      "time": "62",
+      "color": "orange",
+      "percentage": 65
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 65
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 65
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g10",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 65
+    },
+    {
+      "cas": "75-05-8",
+      "gloveId": "g1",
+      "time": "5",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-05-8",
+      "gloveId": "g2",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "75-05-8",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "75-05-8",
+      "gloveId": "g4",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-05-8",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "75-05-8",
+      "gloveId": "g6",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-05-8",
+      "gloveId": "g7",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-05-8",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-05-8",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-05-8",
+      "gloveId": "g10",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 99
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g2",
+      "time": "305",
+      "color": "green",
+      "percentage": 99
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 99
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g4",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 99
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 99
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g6",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 99
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g7",
+      "time": "73",
+      "color": "orange",
+      "percentage": 99
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g8",
+      "time": "5",
+      "color": "red",
+      "percentage": 99
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g9",
+      "time": "5",
+      "color": "red",
+      "percentage": 99
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g10",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 99
+    },
+    {
+      "cas": "75-98-9",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "75-98-9",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "75-98-9",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "75-98-9",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "75-98-9",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "75-98-9",
+      "gloveId": "g6",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "75-98-9",
+      "gloveId": "g7",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "75-98-9",
+      "gloveId": "g8",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "75-98-9",
+      "gloveId": "g9",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "75-98-9",
+      "gloveId": "g10",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g6",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g7",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g8",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g9",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "7664-93-9",
+      "gloveId": "g10",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "7664-38-2",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 85
+    },
+    {
+      "cas": "7664-38-2",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 85
+    },
+    {
+      "cas": "7664-38-2",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 85
+    },
+    {
+      "cas": "7664-38-2",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 85
+    },
+    {
+      "cas": "7664-38-2",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 85
+    },
+    {
+      "cas": "7664-38-2",
+      "gloveId": "g6",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 85
+    },
+    {
+      "cas": "7664-38-2",
+      "gloveId": "g7",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 85
+    },
+    {
+      "cas": "7664-38-2",
+      "gloveId": "g8",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 85
+    },
+    {
+      "cas": "7664-38-2",
+      "gloveId": "g9",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 85
+    },
+    {
+      "cas": "7664-38-2",
+      "gloveId": "g10",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 85
+    },
+    {
+      "cas": "76-03-9",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "76-03-9",
+      "gloveId": "g2",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "76-03-9",
+      "gloveId": "g3",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "76-03-9",
+      "gloveId": "g4",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "76-03-9",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "76-03-9",
+      "gloveId": "g6",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "76-03-9",
+      "gloveId": "g7",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "76-03-9",
+      "gloveId": "g8",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "76-03-9",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "76-03-9",
+      "gloveId": "g10",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "77-78-1",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "77-78-1",
+      "gloveId": "g2",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "77-78-1",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "77-78-1",
+      "gloveId": "g4",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "77-78-1",
+      "gloveId": "g5",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 100
+    },
+    {
+      "cas": "77-78-1",
+      "gloveId": "g6",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "77-78-1",
+      "gloveId": "g7",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "77-78-1",
+      "gloveId": "g8",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "77-78-1",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "77-78-1",
+      "gloveId": "g10",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g2",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g3",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g4",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g5",
+      "time": "< 6",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g6",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g7",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g8",
+      "time": "1",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g10",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "8014-95-7",
+      "gloveId": "g1",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "8014-95-7",
+      "gloveId": "g2",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "8014-95-7",
+      "gloveId": "g3",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "8014-95-7",
+      "gloveId": "g4",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "8014-95-7",
+      "gloveId": "g5",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 100
+    },
+    {
+      "cas": "8014-95-7",
+      "gloveId": "g6",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "8014-95-7",
+      "gloveId": "g7",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "8014-95-7",
+      "gloveId": "g8",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "8014-95-7",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "8014-95-7",
+      "gloveId": "g10",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7647-01-0",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 37
+    },
+    {
+      "cas": "7647-01-0",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 37
+    },
+    {
+      "cas": "7647-01-0",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 37
+    },
+    {
+      "cas": "7647-01-0",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 37
+    },
+    {
+      "cas": "7647-01-0",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 37
+    },
+    {
+      "cas": "7647-01-0",
+      "gloveId": "g6",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 37
+    },
+    {
+      "cas": "7647-01-0",
+      "gloveId": "g7",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 37
+    },
+    {
+      "cas": "7647-01-0",
+      "gloveId": "g8",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 37
+    },
+    {
+      "cas": "7647-01-0",
+      "gloveId": "g9",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 37
+    },
+    {
+      "cas": "7647-01-0",
+      "gloveId": "g10",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 37
+    },
+    {
+      "cas": "1333-82-0",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "1333-82-0",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "1333-82-0",
+      "gloveId": "g3",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 50
+    },
+    {
+      "cas": "1333-82-0",
+      "gloveId": "g4",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 50
+    },
+    {
+      "cas": "1333-82-0",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "1333-82-0",
+      "gloveId": "g6",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 50
+    },
+    {
+      "cas": "1333-82-0",
+      "gloveId": "g7",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "1333-82-0",
+      "gloveId": "g8",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 50
+    },
+    {
+      "cas": "1333-82-0",
+      "gloveId": "g9",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 50
+    },
+    {
+      "cas": "1333-82-0",
+      "gloveId": "g10",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 50
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g1",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 98
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g2",
+      "time": "22",
+      "color": "red",
+      "percentage": 98
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g3",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 98
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g4",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 98
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 98
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g6",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 98
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g7",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 98
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g8",
+      "time": "350",
+      "color": "green",
+      "percentage": 98
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 98
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g10",
+      "time": "20",
+      "color": "red",
+      "percentage": 98
+    },
+    {
+      "cas": "79-09-4",
+      "gloveId": "g1",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "79-09-4",
+      "gloveId": "g2",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "79-09-4",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "79-09-4",
+      "gloveId": "g4",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "79-09-4",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "79-09-4",
+      "gloveId": "g6",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "79-09-4",
+      "gloveId": "g7",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "79-09-4",
+      "gloveId": "g8",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "79-09-4",
+      "gloveId": "g9",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "79-09-4",
+      "gloveId": "g10",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "1319-77-3",
+      "gloveId": "g1",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "1319-77-3",
+      "gloveId": "g2",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 100
+    },
+    {
+      "cas": "1319-77-3",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "1319-77-3",
+      "gloveId": "g4",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "1319-77-3",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "1319-77-3",
+      "gloveId": "g6",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "1319-77-3",
+      "gloveId": "g7",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "1319-77-3",
+      "gloveId": "g8",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "1319-77-3",
+      "gloveId": "g9",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "1319-77-3",
+      "gloveId": "g10",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g1",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 90
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g2",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 90
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 90
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g4",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 90
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 90
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g6",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 90
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g7",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 90
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g8",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 90
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 90
+    },
+    {
+      "cas": "64-18-6",
+      "gloveId": "g10",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 90
+    },
+    {
+      "cas": "7790-94-5",
+      "gloveId": "g1",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "7790-94-5",
+      "gloveId": "g2",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7790-94-5",
+      "gloveId": "g3",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7790-94-5",
+      "gloveId": "g4",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7790-94-5",
+      "gloveId": "g5",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7790-94-5",
+      "gloveId": "g6",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7790-94-5",
+      "gloveId": "g7",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7790-94-5",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7790-94-5",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7790-94-5",
+      "gloveId": "g10",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 70
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g2",
+      "time": "26",
+      "color": "red",
+      "percentage": 70
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 70
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g4",
+      "time": "8",
+      "color": "red",
+      "percentage": 70
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 70
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g6",
+      "time": "14",
+      "color": "red",
+      "percentage": 70
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g7",
+      "time": "53",
+      "color": "orange",
+      "percentage": 70
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g8",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 70
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 70
+    },
+    {
+      "cas": "7697-37-2",
+      "gloveId": "g10",
+      "time": "39",
+      "color": "orange",
+      "percentage": 70
+    },
+    {
+      "cas": "144-62-7",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "144-62-7",
+      "gloveId": "g2",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "144-62-7",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "144-62-7",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "144-62-7",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "144-62-7",
+      "gloveId": "g6",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "144-62-7",
+      "gloveId": "g7",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "144-62-7",
+      "gloveId": "g8",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "144-62-7",
+      "gloveId": "g9",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "144-62-7",
+      "gloveId": "g10",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "141-78-6",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "141-78-6",
+      "gloveId": "g2",
+      "time": "18",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "141-78-6",
+      "gloveId": "g3",
+      "time": "77",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "141-78-6",
+      "gloveId": "g4",
+      "time": "< 5",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "141-78-6",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "141-78-6",
+      "gloveId": "g6",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "141-78-6",
+      "gloveId": "g7",
+      "time": "15",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "141-78-6",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "141-78-6",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "141-78-6",
+      "gloveId": "g10",
+      "time": "5",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "79-10-7",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "79-10-7",
+      "gloveId": "g2",
+      "time": "10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "79-10-7",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "79-10-7",
+      "gloveId": "g4",
+      "time": "136",
+      "color": "yellow",
+      "percentage": 100
+    },
+    {
+      "cas": "79-10-7",
+      "gloveId": "g5",
+      "time": "35",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "79-10-7",
+      "gloveId": "g6",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "79-10-7",
+      "gloveId": "g7",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "79-10-7",
+      "gloveId": "g8",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "79-10-7",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "79-10-7",
+      "gloveId": "g10",
+      "time": "30-60",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "108-24-7",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-24-7",
+      "gloveId": "g2",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "108-24-7",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-24-7",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "108-24-7",
+      "gloveId": "g5",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "108-24-7",
+      "gloveId": "g6",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "108-24-7",
+      "gloveId": "g7",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "108-24-7",
+      "gloveId": "g8",
+      "time": "10-30",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "108-24-7",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "108-24-7",
+      "gloveId": "g10",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g1",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g2",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g3",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g4",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g5",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 50
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g6",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 50
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g7",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g8",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 50
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g9",
+      "time": "60-120",
+      "color": "orange",
+      "percentage": 50
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g10",
+      "time": "120-240",
+      "color": "yellow",
+      "percentage": 50
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g1",
+      "time": "228",
+      "color": "yellow",
+      "percentage": 100
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g2",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g3",
+      "time": "102",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g4",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g5",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g6",
+      "time": "27",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g7",
+      "time": "> 480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g8",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g9",
+      "time": "240-480",
+      "color": "green",
+      "percentage": 100
+    },
+    {
+      "cas": "64-19-7",
+      "gloveId": "g10",
+      "time": "25",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-07-0",
+      "gloveId": "g1",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-07-0",
+      "gloveId": "g2",
+      "time": "42",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "75-07-0",
+      "gloveId": "g3",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-07-0",
+      "gloveId": "g4",
+      "time": "67",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "75-07-0",
+      "gloveId": "g5",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-07-0",
+      "gloveId": "g6",
+      "time": "8",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-07-0",
+      "gloveId": "g7",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-07-0",
+      "gloveId": "g8",
+      "time": "30",
+      "color": "orange",
+      "percentage": 100
+    },
+    {
+      "cas": "75-07-0",
+      "gloveId": "g9",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    },
+    {
+      "cas": "75-07-0",
+      "gloveId": "g10",
+      "time": "< 10",
+      "color": "red",
+      "percentage": 100
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "chemicals": [],
+  "gloves": [
+    {
+      "id": "g1",
+      "name": "AlphaTec 02-100",
+      "material": "LLDPE Laminate",
+      "thickness": "5-layer"
+    },
+    {
+      "id": "g2",
+      "name": "AlphaTec Solvex 37-675",
+      "material": "Nitrile",
+      "thickness": "0.38 mm"
+    },
+    {
+      "id": "g3",
+      "name": "AlphaTec 38-001",
+      "material": "Butyl",
+      "thickness": "0.35 mm"
+    },
+    {
+      "id": "g4",
+      "name": "AlphaTec 39-122.124",
+      "material": "Nitrile",
+      "thickness": "0.38 mm"
+    },
+    {
+      "id": "g5",
+      "name": "AlphaTec 53-002.003",
+      "material": "Neoprene",
+      "thickness": "0.46 mm"
+    },
+    {
+      "id": "g6",
+      "name": "AlphaTec 58-270",
+      "material": "Viton",
+      "thickness": "0.40 mm"
+    },
+    {
+      "id": "g7",
+      "name": "AlphaTec 58-530.535",
+      "material": "Viton",
+      "thickness": "0.65 mm"
+    },
+    {
+      "id": "g8",
+      "name": "DermaShield 73-701.711.721",
+      "material": "Latex/Nitrile",
+      "thickness": "0.30 mm"
+    },
+    {
+      "id": "g9",
+      "name": "TouchNTuff 92-600.605.93-300.700",
+      "material": "Nitrile",
+      "thickness": "0.10 mm"
+    },
+    {
+      "id": "g10",
+      "name": "MICROFLEX 93-260.360",
+      "material": "Nitrile",
+      "thickness": "0.15 mm"
+    }
+  ],
+  "performance": []
+}
