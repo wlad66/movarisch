@@ -7,7 +7,7 @@ import DataManagement from './src/components/DataManagement';
 import { AlertTriangle, Wind, Hand, Activity, Info, RotateCcw, FileText, CheckCircle, AlertOctagon, Shield, Database, Download, ChevronDown } from 'lucide-react';
 import PPEOptimizer from './src/components/PPEOptimizer';
 import ppeData from './src/data/ppe_database.json';
-import { hCodes } from './src/data/hCodes';
+import hCodes from './src/data/hCodes';
 import { Matrix1QuantityUse, Matrix2UsageType, Matrix3ControlType, Matrix4ExposureTime, Matrix5DermalExposure } from './src/components/RiskMatrices';
 import { exportCompleteReport, exportAssessmentToWord, exportArchivedReport } from './src/utils/exportToWord';
 
