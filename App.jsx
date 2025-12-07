@@ -73,6 +73,15 @@ const hCodes = [
   { code: "No Pericolo", text: "Nessuna classificazione pericolosa", score: 1.00 }
 ];
 
+// Debug: verificare che hCodes sia un array
+console.log('🔍 DEBUG hCodes:', {
+  type: typeof hCodes,
+  isArray: Array.isArray(hCodes),
+  length: hCodes?.length,
+  constructor: hCodes?.constructor?.name,
+  firstItem: hCodes?.[0]
+});
+
 // --- COMPONENTE PER LA GESTIONE DEGLI ERRORI (ERROR BOUNDARY) ---
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -455,7 +464,13 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
               <div>
                 <label className="block text-sm font-medium mb-2">Seleziona Frasi H</label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-60 overflow-y-auto border p-2 rounded bg-slate-50">
-                  {(Array.isArray(hCodes) ? hCodes : []).map((h) => (
+                  {(() => {
+                    console.log('🔍 DEBUG prima di .map:', {
+                      hCodes_type: typeof hCodes,
+                      hCodes_isArray: Array.isArray(hCodes),
+                      hCodes_value: hCodes
+                    });
+                    return (Array.isArray(hCodes) ? hCodes : []).map((h) => (
                     <div
                       key={h.code}
                       onClick={() => toggleHCode(h)}
@@ -465,7 +480,8 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
                       <span className="flex-1 truncate">{h.text}</span>
                       <span className="text-xs bg-slate-200 px-2 py-1 rounded ml-2">Score: {h.score.toFixed(2)}</span>
                     </div>
-                  ))}
+                    ));
+                  })()}
                 </div>
               </div>
               <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 flex justify-between items-center">
