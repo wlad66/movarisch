@@ -14,12 +14,19 @@ class User {
         return result.rows[0];
     }
 
-    static async create({ email, password, nome, cognome, azienda, piva, companyData }) {
+    static async create({ email, password, nome, cognome, azienda, piva, companyData, legalData }) {
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const sql = `INSERT INTO users (email, password, nome, cognome, azienda, piva, company_data)
-                     VALUES ($1, $2, $3, $4, $5, $6, $7)
-                     RETURNING id, email, nome, cognome, azienda`;
+        const now = new Date();
+
+        const sql = `INSERT INTO users (
+            email, password, nome, cognome, azienda, piva, company_data,
+            terms_accepted, terms_accepted_at,
+            privacy_accepted, privacy_accepted_at,
+            disclaimer_accepted, disclaimer_accepted_at,
+            professional_confirmed, legal_version
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+        RETURNING id, email, nome, cognome, azienda`;
 
         const result = await pool.query(sql, [
             email,
@@ -28,7 +35,15 @@ class User {
             cognome,
             azienda,
             piva,
-            companyData || {}
+            companyData || {},
+            legalData?.termsAccepted || false,
+            legalData?.termsAccepted ? now : null,
+            legalData?.privacyAccepted || false,
+            legalData?.privacyAccepted ? now : null,
+            legalData?.disclaimerAccepted || false,
+            legalData?.disclaimerAccepted ? now : null,
+            legalData?.professionalConfirmed || false,
+            '1.0'
         ]);
 
         return result.rows[0];

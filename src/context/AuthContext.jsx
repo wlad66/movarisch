@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const register = async (userData, companyData) => {
+    const register = async (userData, companyData, legalData) => {
         try {
             const response = await fetch('/api/auth/register', {
                 method: 'POST',
@@ -80,7 +80,8 @@ export const AuthProvider = ({ children }) => {
                     cognome: userData.cognome,
                     azienda: companyData.ragioneSociale,
                     piva: companyData.partitaIva,
-                    companyData: companyData
+                    companyData: companyData,
+                    legalData: legalData
                 })
             });
 

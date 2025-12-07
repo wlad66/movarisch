@@ -6,10 +6,16 @@ const { generateToken } = require('../middleware/auth');
  */
 async function register(req, res) {
     try {
-        const { email, password, nome, cognome, azienda, piva, companyData } = req.body;
+        const { email, password, nome, cognome, azienda, piva, companyData, legalData } = req.body;
 
         if (!email || !password) {
             return res.status(400).json({ error: 'Email and password are required' });
+        }
+
+        // Validate legal acceptance
+        if (!legalData || !legalData.termsAccepted || !legalData.privacyAccepted ||
+            !legalData.disclaimerAccepted || !legalData.professionalConfirmed) {
+            return res.status(400).json({ error: 'Legal documents must be accepted' });
         }
 
         // Check if user exists
@@ -18,7 +24,7 @@ async function register(req, res) {
             return res.status(400).json({ error: 'User already exists' });
         }
 
-        // Create user
+        // Create user with legal data
         const user = await User.create({
             email,
             password,
@@ -26,7 +32,8 @@ async function register(req, res) {
             cognome,
             azienda,
             piva,
-            companyData
+            companyData,
+            legalData
         });
 
         const token = generateToken(user);

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Building2, UserPlus, ArrowRight, ArrowLeft } from 'lucide-react';
+import LegalAgreement from './LegalAgreement';
 
 const Register = ({ onNavigateToLogin }) => {
     const { register } = useAuth();
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(0);
 
     // Dati Utente
     const [userData, setUserData] = useState({
@@ -24,8 +25,16 @@ const Register = ({ onNavigateToLogin }) => {
         cap: ''
     });
 
+    // Dati Legali
+    const [legalData, setLegalData] = useState(null);
+
     const handleUserChange = (e) => setUserData({ ...userData, [e.target.name]: e.target.value });
     const handleCompanyChange = (e) => setCompanyData({ ...companyData, [e.target.name]: e.target.value });
+
+    const handleLegalAccept = (agreements) => {
+        setLegalData(agreements);
+        setStep(1); // Vai allo step 1 (Dati Utente)
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,7 +42,7 @@ const Register = ({ onNavigateToLogin }) => {
             alert("Le password non coincidono!");
             return;
         }
-        const { success, error } = await register(userData, companyData);
+        const { success, error } = await register(userData, companyData, legalData);
         if (!success) {
             alert("Errore registrazione: " + error);
         }
@@ -41,19 +50,22 @@ const Register = ({ onNavigateToLogin }) => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-slate-100 p-4">
-            <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl border border-slate-200">
-                <div className="text-center mb-8">
-                    <h1 className="text-2xl font-bold text-slate-800">Registrazione Azienda</h1>
-                    <p className="text-slate-500">Crea il tuo account Mono Azienda</p>
+            {step === 0 ? (
+                <LegalAgreement onAccept={handleLegalAccept} />
+            ) : (
+                <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl border border-slate-200">
+                    <div className="text-center mb-8">
+                        <h1 className="text-2xl font-bold text-slate-800">Registrazione Azienda</h1>
+                        <p className="text-slate-500">Crea il tuo account Mono Azienda</p>
 
-                    <div className="flex justify-center mt-4 gap-2">
-                        <div className={`h-2 w-12 rounded-full ${step === 1 ? 'bg-blue-600' : 'bg-slate-200'}`}></div>
-                        <div className={`h-2 w-12 rounded-full ${step === 2 ? 'bg-blue-600' : 'bg-slate-200'}`}></div>
+                        <div className="flex justify-center mt-4 gap-2">
+                            <div className={`h-2 w-12 rounded-full ${step === 1 ? 'bg-blue-600' : 'bg-slate-200'}`}></div>
+                            <div className={`h-2 w-12 rounded-full ${step === 2 ? 'bg-blue-600' : 'bg-slate-200'}`}></div>
+                        </div>
                     </div>
-                </div>
 
-                <form onSubmit={handleSubmit}>
-                    {step === 1 && (
+                    <form onSubmit={handleSubmit}>
+                        {step === 1 && (
                         <div className="space-y-4 animate-in slide-in-from-right duration-300">
                             <h2 className="text-lg font-bold text-slate-700 flex items-center gap-2">
                                 <UserPlus size={20} className="text-blue-500" />
@@ -133,16 +145,17 @@ const Register = ({ onNavigateToLogin }) => {
                     )}
                 </form>
 
-                <div className="mt-6 text-center text-sm text-slate-600 border-t pt-4">
-                    Hai già un account?{' '}
-                    <button
-                        onClick={onNavigateToLogin}
-                        className="text-blue-600 font-bold hover:underline"
-                    >
-                        Accedi qui
-                    </button>
+                    <div className="mt-6 text-center text-sm text-slate-600 border-t pt-4">
+                        Hai già un account?{' '}
+                        <button
+                            onClick={onNavigateToLogin}
+                            className="text-blue-600 font-bold hover:underline"
+                        >
+                            Accedi qui
+                        </button>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
