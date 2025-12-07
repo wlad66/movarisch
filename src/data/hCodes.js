@@ -64,3 +64,5 @@ export const hCodes = [
     { code: "No H - Limite", text: "Sostanza con Valore Limite Esposizione", score: 3.00 },
     { code: "No Pericolo", text: "Nessuna classificazione pericolosa", score: 1.00 }
 ];
+
+export default hCodes;
