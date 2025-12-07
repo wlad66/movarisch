@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
 import { Building, Users, MapPin, Trash2, Plus, FlaskConical, Search, Edit2, Check, X } from 'lucide-react';
-import { hCodes } from '../data/hCodes';
 
-const DataManagement = () => {
+const DataManagement = ({ hCodes }) => {
     const {
         workplaces, addWorkplace, deleteWorkplace,
         roles, addRole, deleteRole,

@@ -1018,7 +1018,7 @@ const AuthenticatedApp = () => {
         <ArchiveView reports={archivedReports} onDelete={deleteReport} />
       )}
       {view === 'data' && (
-        <DataManagement />
+        <DataManagement hCodes={hCodes} />
       )}
     </div>
   );
