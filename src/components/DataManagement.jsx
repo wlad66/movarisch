@@ -3,6 +3,9 @@ import { useData } from '../context/DataContext';
 import { Building, Users, MapPin, Trash2, Plus, FlaskConical, Search, Edit2, Check, X } from 'lucide-react';
 
 const DataManagement = ({ hCodes }) => {
+    // Ensure hCodes is always an array
+    const hCodesArray = Array.isArray(hCodes) ? hCodes : (hCodes?.default || []);
+
     const {
         workplaces, addWorkplace, deleteWorkplace,
         roles, addRole, deleteRole,
@@ -280,7 +283,7 @@ const DataManagement = ({ hCodes }) => {
                             <div>
                                 <label className="block text-sm font-medium text-slate-700 mb-2">Frasi H Associate</label>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-40 overflow-y-auto border p-2 rounded bg-slate-50">
-                                    {hCodes.map((h) => (
+                                    {hCodesArray.map((h) => (
                                         <div
                                             key={h.code}
                                             onClick={() => toggleAgentHCode(h)}
@@ -359,7 +362,7 @@ const DataManagement = ({ hCodes }) => {
                                                         <td className="p-4">
                                                             <div className="max-h-32 overflow-y-auto border rounded p-2 bg-slate-50">
                                                                 <div className="grid grid-cols-2 gap-1">
-                                                                    {hCodes.slice(0, 20).map((h) => (
+                                                                    {hCodesArray.slice(0, 20).map((h) => (
                                                                         <div
                                                                             key={h.code}
                                                                             onClick={() => toggleEditHCode(h)}
