@@ -35,7 +35,12 @@ async function initDb() {
                 cognome VARCHAR(255),
                 azienda VARCHAR(255),
                 piva VARCHAR(50),
-                company_data JSONB
+                company_data JSONB,
+                legal_data JSONB,
+                subscription_status VARCHAR(20) DEFAULT 'trial',
+                trial_ends_at TIMESTAMP,
+                subscription_ends_at TIMESTAMP,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         `);
 
@@ -80,6 +85,55 @@ async function initDb() {
                 hCodes JSONB,
                 riskLevel INTEGER DEFAULT 0,
                 additionalData JSONB,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+
+        // Subscriptions Table
+        await client.query(`
+            CREATE TABLE IF NOT EXISTS subscriptions (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+                status VARCHAR(20) DEFAULT 'trial',
+                trial_start_date TIMESTAMP,
+                trial_end_date TIMESTAMP,
+                subscription_start_date TIMESTAMP,
+                subscription_end_date TIMESTAMP,
+                payment_method VARCHAR(50),
+                amount DECIMAL(10,2),
+                currency VARCHAR(3) DEFAULT 'EUR',
+                auto_renew BOOLEAN DEFAULT false,
+                stripe_subscription_id VARCHAR(255) UNIQUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+
+        // Payments Table
+        await client.query(`
+            CREATE TABLE IF NOT EXISTS payments (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+                subscription_id INTEGER REFERENCES subscriptions(id),
+                amount DECIMAL(10,2) NOT NULL,
+                currency VARCHAR(3) DEFAULT 'EUR',
+                payment_provider VARCHAR(50) DEFAULT 'stripe',
+                payment_id VARCHAR(255) UNIQUE,
+                stripe_payment_intent_id VARCHAR(255),
+                status VARCHAR(20) DEFAULT 'pending',
+                payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+
+        // Password Reset Tokens Table
+        await client.query(`
+            CREATE TABLE IF NOT EXISTS password_reset_tokens (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+                token VARCHAR(255) UNIQUE NOT NULL,
+                expires_at TIMESTAMP NOT NULL,
+                used BOOLEAN DEFAULT false,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         `);
