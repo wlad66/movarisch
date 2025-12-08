@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 class EmailService {
     constructor() {
-        this.transporter = nodemailer.createTransporter({
+        this.transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST || 'smtp.hostinger.com',
             port: parseInt(process.env.SMTP_PORT) || 465,
             secure: process.env.SMTP_SECURE === 'true' || true,
