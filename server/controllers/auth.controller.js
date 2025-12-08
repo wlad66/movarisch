@@ -1,4 +1,8 @@
 const User = require('../models/User');
+const Subscription = require('../models/Subscription');
+const PasswordResetToken = require('../models/PasswordResetToken');
+const emailService = require('../services/email.service');
+const bcrypt = require('bcrypt');
 const { generateToken } = require('../middleware/auth');
 
 /**
@@ -36,12 +40,47 @@ async function register(req, res) {
             legalData
         });
 
+        // Auto-attiva trial di 7 giorni
+        const trialDays = parseInt(process.env.TRIAL_DAYS) || 7;
+        const now = new Date();
+        const trialEndDate = new Date(now);
+        trialEndDate.setDate(trialEndDate.getDate() + trialDays);
+
+        await Subscription.create({
+            userId: user.id,
+            status: 'trial',
+            trialStartDate: now,
+            trialEndDate: trialEndDate,
+            subscriptionStartDate: null,
+            subscriptionEndDate: null,
+            paymentMethod: null,
+            amount: null,
+            currency: 'EUR',
+            autoRenew: false,
+            stripeSubscriptionId: null
+        });
+
+        // Aggiorna user con trial info
+        const pool = require('../config/database');
+        await pool.query(
+            `UPDATE users SET subscription_status = $1, trial_ends_at = $2 WHERE id = $3`,
+            ['trial', trialEndDate, user.id]
+        );
+
+        // Invia email benvenuto
+        await emailService.sendWelcomeEmail(user.email, user.nome, trialEndDate);
+
         const token = generateToken(user);
 
         res.json({
             token,
             user: User.formatUser(user),
-            company: companyData || {}
+            company: companyData || {},
+            trial: {
+                active: true,
+                daysRemaining: trialDays,
+                endsAt: trialEndDate
+            }
         });
     } catch (error) {
         console.error('Register error:', error);
@@ -106,4 +145,106 @@ async function me(req, res) {
     }
 }
 
-module.exports = { register, login, me };
+/**
+ * POST /api/auth/forgot-password
+ */
+async function forgotPassword(req, res) {
+    try {
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({ error: 'Email is required' });
+        }
+
+        // Find user
+        const user = await User.findByEmail(email);
+        if (!user) {
+            // Non rivelare se l'email esiste o no (sicurezza)
+            return res.json({ message: 'If the email exists, a reset link has been sent' });
+        }
+
+        // Rate limiting: max 3 tentativi all'ora
+        const recentAttempts = await PasswordResetToken.countRecentAttempts(user.id, 60);
+        if (recentAttempts >= 3) {
+            return res.status(429).json({ error: 'Too many reset attempts. Please try again later.' });
+        }
+
+        // Crea token reset
+        const resetToken = await PasswordResetToken.create(user.id, 1); // 1 ora validità
+
+        // Invia email
+        await emailService.sendPasswordResetEmail(user.email, user.nome, resetToken.token);
+
+        res.json({ message: 'If the email exists, a reset link has been sent' });
+    } catch (error) {
+        console.error('Forgot password error:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+}
+
+/**
+ * POST /api/auth/reset-password/:token
+ */
+async function resetPassword(req, res) {
+    try {
+        const { token } = req.params;
+        const { password } = req.body;
+
+        if (!password || password.length < 6) {
+            return res.status(400).json({ error: 'Password must be at least 6 characters' });
+        }
+
+        // Verifica validità token
+        const resetToken = await PasswordResetToken.findValidToken(token);
+        if (!resetToken) {
+            return res.status(400).json({ error: 'Invalid or expired reset token' });
+        }
+
+        // Hash nuova password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Aggiorna password utente
+        const user = await User.findById(resetToken.user_id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Update password
+        const sql = `UPDATE users SET password = $1 WHERE id = $2`;
+        const pool = require('../config/database');
+        await pool.query(sql, [hashedPassword, user.id]);
+
+        // Marca token come usato
+        await PasswordResetToken.markAsUsed(token);
+
+        // Invalida tutti gli altri token dell'utente
+        await PasswordResetToken.invalidateAllForUser(user.id);
+
+        res.json({ message: 'Password reset successfully' });
+    } catch (error) {
+        console.error('Reset password error:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+}
+
+/**
+ * GET /api/auth/verify-reset-token/:token
+ */
+async function verifyResetToken(req, res) {
+    try {
+        const { token } = req.params;
+
+        const resetToken = await PasswordResetToken.findValidToken(token);
+
+        if (!resetToken) {
+            return res.status(400).json({ valid: false, error: 'Invalid or expired token' });
+        }
+
+        res.json({ valid: true });
+    } catch (error) {
+        console.error('Verify token error:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+}
+
+module.exports = { register, login, me, forgotPassword, resetPassword, verifyResetToken };

@@ -7,6 +7,7 @@ require('./config/database');
 
 // Import routes
 const authRoutes = require('./routes/auth.routes');
+const subscriptionRoutes = require('./routes/subscription.routes');
 const workplacesRoutes = require('./routes/workplaces.routes');
 const rolesRoutes = require('./routes/roles.routes');
 const inventoryRoutes = require('./routes/inventory.routes');
@@ -21,6 +22,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/subscription', subscriptionRoutes);
 app.use('/api/workplaces', workplacesRoutes);
 app.use('/api/roles', rolesRoutes);
 app.use('/api/inventory', inventoryRoutes);
