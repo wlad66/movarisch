@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Building2, UserPlus, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Building2, UserPlus, ArrowRight, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import LegalAgreement from './LegalAgreement';
 
 const Register = ({ onNavigateToLogin }) => {
     const { register } = useAuth();
     const [step, setStep] = useState(0);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     // Dati Utente
     const [userData, setUserData] = useState({
@@ -45,6 +47,9 @@ const Register = ({ onNavigateToLogin }) => {
         const { success, error } = await register(userData, companyData, legalData);
         if (!success) {
             alert("Errore registrazione: " + error);
+        } else {
+            // Force reload to bypass aggressive proxy caching and load fresh JS
+            window.location.reload();
         }
     };
 
@@ -88,11 +93,43 @@ const Register = ({ onNavigateToLogin }) => {
                             <div className="grid md:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
-                                    <input type="password" name="password" required value={userData.password} onChange={handleUserChange} className="w-full p-2 border rounded" />
+                                    <div className="relative">
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            name="password"
+                                            required
+                                            value={userData.password}
+                                            onChange={handleUserChange}
+                                            className="w-full p-2 pr-10 border rounded"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                                        >
+                                            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                        </button>
+                                    </div>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-slate-700 mb-1">Conferma Password</label>
-                                    <input type="password" name="confirmPassword" required value={userData.confirmPassword} onChange={handleUserChange} className="w-full p-2 border rounded" />
+                                    <div className="relative">
+                                        <input
+                                            type={showConfirmPassword ? "text" : "password"}
+                                            name="confirmPassword"
+                                            required
+                                            value={userData.confirmPassword}
+                                            onChange={handleUserChange}
+                                            className="w-full p-2 pr-10 border rounded"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                            className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                                        >
+                                            {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 

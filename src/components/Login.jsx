@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { LogIn, AlertCircle } from 'lucide-react';
+import { LogIn, AlertCircle, Eye, EyeOff } from 'lucide-react';
 
-const Login = ({ onNavigateToRegister }) => {
+const Login = ({ onNavigateToRegister, onNavigateToForgotPassword }) => {
     const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
 
     const handleSubmit = async (e) => {
@@ -14,6 +15,9 @@ const Login = ({ onNavigateToRegister }) => {
         const { success, error } = await login(email, password);
         if (!success) {
             setError(error || 'Credenziali non valide.');
+        } else {
+            // Force reload to bypass aggressive proxy caching and load fresh JS
+            window.location.reload();
         }
     };
 
@@ -49,14 +53,32 @@ const Login = ({ onNavigateToRegister }) => {
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
-                        <input
-                            type="password"
-                            required
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                            placeholder="••••••••"
-                        />
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full p-3 pr-12 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                placeholder="••••••••"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                            >
+                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                            </button>
+                        </div>
+                    </div>
+                    <div className="text-right">
+                        <button
+                            type="button"
+                            onClick={onNavigateToForgotPassword}
+                            className="text-sm text-blue-600 hover:underline"
+                        >
+                            Password dimenticata?
+                        </button>
                     </div>
                     <button
                         type="submit"
