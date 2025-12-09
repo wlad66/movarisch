@@ -11,8 +11,8 @@ let html = fs.readFileSync(indexPath, 'utf-8');
 
 // Aggiungi timestamp come query parameter ai file JS e CSS
 const timestamp = Date.now();
-html = html.replace(/(<script[^>]*src="[^"]+\.js")/g, `$1?v=${timestamp}`);
-html = html.replace(/(<link[^>]*href="[^"]+\.css")/g, `$1?v=${timestamp}`);
+html = html.replace(/(<script[^>]*src="[^"]+\.js)(")/g, `$1?v=${timestamp}$2`);
+html = html.replace(/(<link[^>]*href="[^"]+\.css)(")/g, `$1?v=${timestamp}$2`);
 
 // Scrivi il file modificato
 fs.writeFileSync(indexPath, html);

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useMemo, useCallback } from 'react';
 
 const AuthContext = createContext(null);
 
@@ -8,7 +8,11 @@ export const AuthProvider = ({ children }) => {
     const [trial, setTrial] = useState(null);
     const [subscription, setSubscription] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [token, setToken] = useState(localStorage.getItem('movarisch_token'));
+    const [token, setToken] = useState(() => {
+        const storedToken = localStorage.getItem('movarisch_token');
+        // Return null instead of the string "null"
+        return storedToken && storedToken !== 'null' ? storedToken : null;
+    });
 
     useEffect(() => {
         // Al caricamento, valida il token tramite API
@@ -30,8 +34,8 @@ export const AuthProvider = ({ children }) => {
                 setUser(data.user);
                 setCompany(data.company);
 
-                // Fetch subscription status and WAIT for it
-                await fetchSubscriptionStatus();
+                // Fetch subscription status and WAIT for it, passing the token explicitly
+                await fetchSubscriptionStatus(token);
             } else {
                 // Token non valido, pulisci
                 logout();
@@ -44,19 +48,17 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const fetchSubscriptionStatus = async (authToken = null) => {
+    const fetchSubscriptionStatus = useCallback(async (authToken = null) => {
         try {
-            console.log('🔍 fetchSubscriptionStatus called with authToken:', authToken ? 'PROVIDED' : 'NULL');
-            console.log('🔍 Current token from state:', token ? 'EXISTS' : 'NULL');
-
             const tokenToUse = authToken || token;
 
-            console.log('🔍 Token to use:', tokenToUse ? tokenToUse.substring(0, 20) + '...' : 'NULL');
-
-            if (!tokenToUse) {
-                console.log('⚠️ No token available for subscription status');
+            // Check if token is null, undefined, empty string, or the string "null"
+            if (!tokenToUse || tokenToUse === 'null' || tokenToUse === 'undefined') {
+                console.log('⚠️ No token available for subscription status, token value:', tokenToUse);
                 return;
             }
+
+            console.log('📡 Fetching subscription status with token:', tokenToUse.substring(0, 20) + '...');
 
             const response = await fetch('/api/subscription/status', {
                 headers: { 'Authorization': `Bearer ${tokenToUse}` }
@@ -64,8 +66,7 @@ export const AuthProvider = ({ children }) => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('📊 Subscription status data:', data);
-                console.log('📅 Trial data:', data.trial);
+                console.log('✅ Subscription status fetched:', data.trial ? 'TRIAL ACTIVE' : 'NO TRIAL');
                 setTrial(data.trial);
                 setSubscription(data.subscription);
             } else {
@@ -74,7 +75,7 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
             console.error('Subscription status fetch error:', error);
         }
-    };
+    }, [token]);
 
     const login = async (email, password) => {
         try {
@@ -164,8 +165,20 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('movarisch_token');
     };
 
+    const contextValue = useMemo(() => ({
+        user,
+        company,
+        trial,
+        subscription,
+        login,
+        register,
+        logout,
+        loading,
+        token
+    }), [user, company, trial, subscription, loading, token, login, register, logout]);
+
     return (
-        <AuthContext.Provider value={{ user, company, trial, subscription, login, register, logout, loading, token, fetchSubscriptionStatus }}>
+        <AuthContext.Provider value={contextValue}>
             {children}
         </AuthContext.Provider>
     );

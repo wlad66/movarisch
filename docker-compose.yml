@@ -12,8 +12,31 @@ services:
   movarisch-backend:
     build: ./server
     ports:
-      - "3000:3000"
+      - "3001:3000"
     restart: always
     container_name: movarisch-backend
+    environment:
+      - DB_HOST=movarisch-db
+      - DB_PORT=5432
+      - DB_NAME=movarisch
+      - DB_USER=movarisch_app
+      - DB_PASSWORD=MoVa2025App!
+    depends_on:
+      - movarisch-db
+
+  movarisch-db:
+    image: postgres:15-alpine
+    container_name: movarisch-db
+    restart: always
+    environment:
+      - POSTGRES_DB=movarisch
+      - POSTGRES_USER=movarisch_app
+      - POSTGRES_PASSWORD=MoVa2025App!
     volumes:
-      - ./server/movarisch.db:/app/movarisch.db
+      - movarisch-db-data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+volumes:
+  movarisch-db-data:
+    driver: local
