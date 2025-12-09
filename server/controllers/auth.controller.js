@@ -2,7 +2,7 @@ const User = require('../models/User');
 const Subscription = require('../models/Subscription');
 const PasswordResetToken = require('../models/PasswordResetToken');
 const emailService = require('../services/email.service');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { generateToken } = require('../middleware/auth');
 
 /**
@@ -10,24 +10,29 @@ const { generateToken } = require('../middleware/auth');
  */
 async function register(req, res) {
     try {
+        console.log('1. Register start');
         const { email, password, nome, cognome, azienda, piva, companyData, legalData } = req.body;
 
+        console.log('2. Validating input');
         if (!email || !password) {
             return res.status(400).json({ error: 'Email and password are required' });
         }
 
+        console.log('3. Validating legal data');
         // Validate legal acceptance
         if (!legalData || !legalData.termsAccepted || !legalData.privacyAccepted ||
             !legalData.disclaimerAccepted || !legalData.professionalConfirmed) {
             return res.status(400).json({ error: 'Legal documents must be accepted' });
         }
 
+        console.log('4. Checking existing user');
         // Check if user exists
         const existing = await User.findByEmail(email);
         if (existing) {
             return res.status(400).json({ error: 'User already exists' });
         }
 
+        console.log('5. Creating user');
         // Create user with legal data
         const user = await User.create({
             email,
@@ -39,6 +44,7 @@ async function register(req, res) {
             companyData,
             legalData
         });
+        console.log('6. User created:', user.id);
 
         // Auto-attiva trial di 7 giorni
         const trialDays = parseInt(process.env.TRIAL_DAYS) || 7;

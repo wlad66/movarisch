@@ -1,5 +1,5 @@
 const pool = require('../config/database');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 class User {
     static async findByEmail(email) {
@@ -15,42 +15,43 @@ class User {
     }
 
     static async create({ email, password, nome, cognome, azienda, piva, companyData, legalData }) {
-        const hashedPassword = await bcrypt.hash(password, 10);
+        try {
+            console.log('User.create: hashing password');
+            const hashedPassword = await bcrypt.hash(password, 10);
 
-        const now = new Date();
+            const sql = `INSERT INTO users (
+                email, password, nome, cognome, azienda, piva, company_data, legal_data
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+            RETURNING id, email, nome, cognome, azienda, piva, company_data, legal_data`;
 
-        const sql = `INSERT INTO users (
-            email, password, nome, cognome, azienda, piva, company_data,
-            terms_accepted, terms_accepted_at,
-            privacy_accepted, privacy_accepted_at,
-            disclaimer_accepted, disclaimer_accepted_at,
-            professional_confirmed, legal_version
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
-        RETURNING id, email, nome, cognome, azienda`;
+            console.log('User.create: executing INSERT query');
+            const result = await pool.query(sql, [
+                email,
+                hashedPassword,
+                nome,
+                cognome,
+                azienda,
+                piva,
+                companyData || {},
+                legalData || {}
+            ]);
 
-        const result = await pool.query(sql, [
-            email,
-            hashedPassword,
-            nome,
-            cognome,
-            azienda,
-            piva,
-            companyData || {},
-            legalData?.termsAccepted || false,
-            legalData?.termsAccepted ? now : null,
-            legalData?.privacyAccepted || false,
-            legalData?.privacyAccepted ? now : null,
-            legalData?.disclaimerAccepted || false,
-            legalData?.disclaimerAccepted ? now : null,
-            legalData?.professionalConfirmed || false,
-            '1.0'
-        ]);
-
-        return result.rows[0];
+            console.log('User.create: user inserted successfully');
+            return result.rows[0];
+        } catch (error) {
+            console.error('User.create ERROR:', error.message, error.stack);
+            throw error;
+        }
     }
 
     static async verifyPassword(plainPassword, hashedPassword) {
         return bcrypt.compare(plainPassword, hashedPassword);
+    }
+
+    static async updatePassword(userId, newPassword) {
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const sql = `UPDATE users SET password = $1 WHERE id = $2`;
+        await pool.query(sql, [hashedPassword, userId]);
     }
 
     static formatUser(user) {

@@ -39,7 +39,7 @@ class EmailService {
      * Email reset password
      */
     async sendPasswordResetEmail(email, nome, resetToken) {
-        const resetUrl = `${process.env.APP_URL}/reset-password/${resetToken}`;
+        const resetUrl = `${process.env.APP_URL || 'https://movarisch.safetyprosuite.com'}?token=${resetToken}`;
 
         const html = `
 <!DOCTYPE html>
