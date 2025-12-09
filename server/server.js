@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 // Import database config (initializes schema)
@@ -20,6 +21,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from dist folder with proper cache headers
+app.use('/assets', express.static(path.join(__dirname, 'dist/assets'), {
+    maxAge: '1y', // Cache assets for 1 year (they have hash in filename)
+    immutable: true
+}));
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/subscription', subscriptionRoutes);
@@ -33,10 +40,27 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', message: 'MoVaRisCh API is running' });
 });
 
+// Serve index.html for all other routes (SPA fallback) with no-cache
+app.get('*', (req, res) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+
 // Error handler - must be last
 app.use((err, req, res, next) => {
     console.error('Unhandled error:', err.stack);
     res.status(500).json({ error: 'Something went wrong!' });
+});
+
+// Global error handlers
+process.on('uncaughtException', (error) => {
+    console.error('UNCAUGHT EXCEPTION:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('UNHANDLED REJECTION at:', promise, 'reason:', reason);
 });
 
 // Start Server
