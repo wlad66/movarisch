@@ -5,6 +5,8 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [company, setCompany] = useState(null);
+    const [trial, setTrial] = useState(null);
+    const [subscription, setSubscription] = useState(null);
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(localStorage.getItem('movarisch_token'));
 
@@ -27,6 +29,9 @@ export const AuthProvider = ({ children }) => {
                 const data = await response.json();
                 setUser(data.user);
                 setCompany(data.company);
+
+                // Fetch subscription status and WAIT for it
+                await fetchSubscriptionStatus();
             } else {
                 // Token non valido, pulisci
                 logout();
@@ -36,6 +41,38 @@ export const AuthProvider = ({ children }) => {
             logout();
         } finally {
             setLoading(false);
+        }
+    };
+
+    const fetchSubscriptionStatus = async (authToken = null) => {
+        try {
+            console.log('🔍 fetchSubscriptionStatus called with authToken:', authToken ? 'PROVIDED' : 'NULL');
+            console.log('🔍 Current token from state:', token ? 'EXISTS' : 'NULL');
+
+            const tokenToUse = authToken || token;
+
+            console.log('🔍 Token to use:', tokenToUse ? tokenToUse.substring(0, 20) + '...' : 'NULL');
+
+            if (!tokenToUse) {
+                console.log('⚠️ No token available for subscription status');
+                return;
+            }
+
+            const response = await fetch('/api/subscription/status', {
+                headers: { 'Authorization': `Bearer ${tokenToUse}` }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('📊 Subscription status data:', data);
+                console.log('📅 Trial data:', data.trial);
+                setTrial(data.trial);
+                setSubscription(data.subscription);
+            } else {
+                console.error('❌ Subscription status fetch failed:', response.status);
+            }
+        } catch (error) {
+            console.error('Subscription status fetch error:', error);
         }
     };
 
@@ -60,6 +97,9 @@ export const AuthProvider = ({ children }) => {
 
             // Salva solo il token in localStorage
             localStorage.setItem('movarisch_token', data.token);
+
+            // Fetch subscription status after login using the fresh token and WAIT
+            await fetchSubscriptionStatus(data.token);
 
             return { success: true };
         } catch (error) {
@@ -96,8 +136,16 @@ export const AuthProvider = ({ children }) => {
             setCompany(data.company);
             setToken(data.token);
 
+            // Store trial data from registration response
+            if (data.trial) {
+                setTrial(data.trial);
+            }
+
             // Salva solo il token in localStorage
             localStorage.setItem('movarisch_token', data.token);
+
+            // Fetch full subscription status using the fresh token and WAIT
+            await fetchSubscriptionStatus(data.token);
 
             return { success: true };
         } catch (error) {
@@ -109,13 +157,15 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         setCompany(null);
+        setTrial(null);
+        setSubscription(null);
         setToken(null);
         // Rimuovi solo il token
         localStorage.removeItem('movarisch_token');
     };
 
     return (
-        <AuthContext.Provider value={{ user, company, login, register, logout, loading, token }}>
+        <AuthContext.Provider value={{ user, company, trial, subscription, login, register, logout, loading, token, fetchSubscriptionStatus }}>
             {children}
         </AuthContext.Provider>
     );

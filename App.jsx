@@ -3,8 +3,12 @@ import { AuthProvider, useAuth } from './src/context/AuthContext';
 import { DataProvider, useData } from './src/context/DataContext';
 import Login from './src/components/Login';
 import Register from './src/components/Register';
+import ForgotPassword from './src/components/ForgotPassword';
+import ResetPassword from './src/components/ResetPassword';
 import DataManagement from './src/components/DataManagement';
-import { AlertTriangle, Wind, Hand, Activity, Info, RotateCcw, FileText, CheckCircle, AlertOctagon, Shield, Database, Download, ChevronDown } from 'lucide-react';
+import TrialBanner from './src/components/TrialBanner';
+import Subscription from './src/components/Subscription';
+import { AlertTriangle, Wind, Hand, Activity, Info, RotateCcw, FileText, CheckCircle, AlertOctagon, Shield, Database, Download, ChevronDown, CreditCard } from 'lucide-react';
 import PPEOptimizer from './src/components/PPEOptimizer';
 import ppeData from './src/data/ppe_database.json';
 import { Matrix1QuantityUse, Matrix2UsageType, Matrix3ControlType, Matrix4ExposureTime, Matrix5DermalExposure } from './src/components/RiskMatrices';
@@ -940,12 +944,16 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
 
 // --- COMPONENTE PRINCIPALE CON AUTH ---
 const AuthenticatedApp = () => {
-  const { user, logout, company } = useAuth();
+  const { user, logout, company, trial } = useAuth();
   const { addToInventory } = useData();
   const [view, setView] = useState('data');
   const [savedAssessments, setSavedAssessments] = useState([]);
   const [archivedReports, setArchivedReports] = useState([]);
   const { token } = useAuth(); // Get token for API calls
+
+  // Debug log
+  console.log('🎯 AuthenticatedApp trial:', trial);
+  console.log('🎯 Trial is truthy?', !!trial);
 
   // Load reports from Backend on mount or token change
   useEffect(() => {
@@ -1117,6 +1125,10 @@ const AuthenticatedApp = () => {
     showToast('Report eliminato', 'success');
   };
 
+  const handleUpgrade = () => {
+    setView('subscription');
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
       {/* Top Navigation Integrated into Header */}
@@ -1171,8 +1183,21 @@ const AuthenticatedApp = () => {
           >
             <Database size={16} /> Anagrafiche
           </button>
+          <button
+            onClick={() => setView('subscription')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-t-lg font-medium transition ${view === 'subscription' ? 'bg-slate-50 text-blue-900' : 'text-blue-200 hover:bg-blue-800 hover:text-white'}`}
+          >
+            <CreditCard size={16} /> Abbonamento
+          </button>
         </div>
       </div>
+
+      {/* Trial Banner */}
+      {trial && (
+        <div className="max-w-4xl mx-auto mt-4 px-4">
+          <TrialBanner trial={trial} onUpgrade={handleUpgrade} />
+        </div>
+      )}
 
       {view === 'calculator' && (
         <MoVaRisChContent savedAssessments={savedAssessments} addAssessment={addAssessment} />
@@ -1186,13 +1211,27 @@ const AuthenticatedApp = () => {
       {view === 'data' && (
         <DataManagement hCodes={hCodes} />
       )}
+      {view === 'subscription' && (
+        <Subscription />
+      )}
     </div>
   );
 };
 
 const AppContent = () => {
   const { user, loading } = useAuth();
-  const [authView, setAuthView] = useState('login'); // 'login' or 'register'
+  const [authView, setAuthView] = useState('login'); // 'login', 'register', 'forgot-password', or 'reset-password'
+  const [resetToken, setResetToken] = useState(null);
+
+  // Check URL for reset password token on mount
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    if (token) {
+      setResetToken(token);
+      setAuthView('reset-password');
+    }
+  }, []);
 
   if (loading) {
     return <div className="min-h-screen flex items-center justify-center text-slate-500">Caricamento...</div>;
@@ -1202,7 +1241,18 @@ const AppContent = () => {
     if (authView === 'register') {
       return <Register onNavigateToLogin={() => setAuthView('login')} />;
     }
-    return <Login onNavigateToRegister={() => setAuthView('register')} />;
+    if (authView === 'forgot-password') {
+      return <ForgotPassword onNavigateToLogin={() => setAuthView('login')} />;
+    }
+    if (authView === 'reset-password') {
+      return <ResetPassword token={resetToken} onNavigateToLogin={() => setAuthView('login')} />;
+    }
+    return (
+      <Login
+        onNavigateToRegister={() => setAuthView('register')}
+        onNavigateToForgotPassword={() => setAuthView('forgot-password')}
+      />
+    );
   }
 
   return <AuthenticatedApp />;

@@ -17,9 +17,10 @@ async function getStatus(req, res) {
         if (!subscription) {
             return res.json({
                 status: 'none',
-                trial: false,
                 active: false,
-                expired: true
+                expired: true,
+                trial: null,
+                subscription: null
             });
         }
 
@@ -34,15 +35,34 @@ async function getStatus(req, res) {
             endDate = subscription.subscription_end_date;
         }
 
-        res.json({
+        // Return data in format expected by frontend
+        const response = {
             status: subscription.status,
-            trial: subscription.status === 'trial',
             active: isActive,
-            expired: !isActive,
-            daysRemaining,
-            endDate,
-            autoRenew: subscription.auto_renew || false
-        });
+            expired: !isActive
+        };
+
+        // Add trial object if in trial
+        if (subscription.status === 'trial') {
+            response.trial = {
+                active: isActive,
+                daysRemaining,
+                endsAt: endDate
+            };
+        }
+
+        // Add subscription object if active subscription
+        if (subscription.status === 'active') {
+            response.subscription = {
+                status: 'active',
+                daysRemaining,
+                endsAt: endDate,
+                startsAt: subscription.subscription_start_date,
+                autoRenew: subscription.auto_renew || false
+            };
+        }
+
+        res.json(response);
     } catch (error) {
         console.error('Get subscription status error:', error);
         res.status(500).json({ error: 'Server error' });

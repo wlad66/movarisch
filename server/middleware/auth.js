@@ -9,14 +9,21 @@ function verifyToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
+    console.log('🔐 verifyToken called for:', req.method, req.path);
+    console.log('🔐 Auth header present:', !!authHeader);
+
     if (!token) {
+        console.log('❌ No token provided');
         return res.status(401).json({ error: 'Access denied' });
     }
 
     jwt.verify(token, SECRET_KEY, (err, user) => {
         if (err) {
+            console.log('❌ Token verification failed:', err.message);
+            console.log('❌ Token was:', token.substring(0, 20) + '...');
             return res.status(403).json({ error: 'Invalid token' });
         }
+        console.log('✅ Token verified for user:', user.id);
         req.user = user;
         next();
     });
