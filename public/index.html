@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0;url=/?v=APP_VERSION">
+  <script>
+    // Redirect with cache-busting version
+    const version = 'APP_VERSION';
+    if (!window.location.search.includes('v=')) {
+      window.location.href = '/?v=' + version;
+    }
+  </script>
+</head>
+<body>
+  <p>Loading...</p>
+</body>
+</html>

@@ -15,10 +15,8 @@ const Login = ({ onNavigateToRegister, onNavigateToForgotPassword }) => {
         const { success, error } = await login(email, password);
         if (!success) {
             setError(error || 'Credenziali non valide.');
-        } else {
-            // Force reload to bypass aggressive proxy caching and load fresh JS
-            window.location.reload();
         }
+        // No reload needed - AuthContext will update automatically
     };
 
     return (

@@ -23,20 +23,31 @@ Write-Host "OK Dist copiato" -ForegroundColor Green
 # STEP 3: Archivi
 Write-Host "`nSTEP 3: Creazione archivi..." -ForegroundColor Yellow
 if (Test-Path "dist.tar.gz") { Remove-Item "dist.tar.gz" }
-if (Test-Path "server-files.tar.gz") { Remove-Item "server-files.tar.gz" }
 tar -czf dist.tar.gz -C server dist
-tar -czf server-files.tar.gz server
 Write-Host "OK Archivi creati" -ForegroundColor Green
 
 # STEP 4: Upload
 Write-Host "`nSTEP 4: Upload su VPS..." -ForegroundColor Yellow
 echo $Password | pscp -batch -pw $Password dist.tar.gz "${VpsUser}@${VpsIp}:${VpsPath}/"
-echo $Password | pscp -batch -pw $Password server-files.tar.gz "${VpsUser}@${VpsIp}:${VpsPath}/"
+echo $Password | pscp -batch -pw $Password Dockerfile "${VpsUser}@${VpsIp}:${VpsPath}/"
+echo $Password | pscp -batch -pw $Password nginx.conf "${VpsUser}@${VpsIp}:${VpsPath}/"
 Write-Host "OK File caricati" -ForegroundColor Green
 
-# STEP 5: Deploy
-Write-Host "`nSTEP 5: Deploy..." -ForegroundColor Yellow
-$cmd = "cd /opt/movarisch-new && tar -xzf server-files.tar.gz && tar -xzf dist.tar.gz -C server/ && docker-compose down && docker-compose up -d --build --force-recreate && sleep 3 && docker-compose ps"
+# STEP 5: Extract files (BEFORE build)
+Write-Host "`nSTEP 5: Extract files..." -ForegroundColor Yellow
+$cmd = "cd /opt/movarisch-new && tar -xzf dist.tar.gz -C server/"
+echo $Password | plink -batch -pw $Password -t "${VpsUser}@${VpsIp}" $cmd
+Write-Host "OK Files extracted" -ForegroundColor Green
+
+# STEP 6: Build images
+Write-Host "`nSTEP 6: Build Docker images..." -ForegroundColor Yellow
+$cmd = "cd /opt/movarisch-new && docker-compose build --no-cache"
+echo $Password | plink -batch -pw $Password -t "${VpsUser}@${VpsIp}" $cmd
+Write-Host "OK Images built" -ForegroundColor Green
+
+# STEP 7: Deploy
+Write-Host "`nSTEP 7: Deploy containers..." -ForegroundColor Yellow
+$cmd = "cd /opt/movarisch-new && docker-compose down && docker-compose up -d --force-recreate && sleep 3 && docker-compose ps"
 echo $Password | plink -batch -pw $Password -t "${VpsUser}@${VpsIp}" $cmd
 
 Write-Host "`nOK Deploy completato!" -ForegroundColor Green

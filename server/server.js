@@ -40,11 +40,15 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', message: 'MoVaRisCh API is running' });
 });
 
-// Serve index.html for all other routes (SPA fallback) with no-cache
+// Serve index.html for all other routes (SPA fallback) with AGGRESSIVE no-cache
 app.get('*', (req, res) => {
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    // Multiple layers of cache prevention
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
+    res.setHeader('Surrogate-Control', 'no-store');
+    // Change ETag on every request to force revalidation
+    res.setHeader('ETag', `"${Date.now()}"`);
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 

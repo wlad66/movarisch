@@ -944,12 +944,11 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
 
 // --- COMPONENTE PRINCIPALE CON AUTH ---
 const AuthenticatedApp = () => {
-  const { user, logout, company, trial } = useAuth();
+  const { user, logout, company, trial, token } = useAuth();
   const { addToInventory } = useData();
   const [view, setView] = useState('data');
   const [savedAssessments, setSavedAssessments] = useState([]);
   const [archivedReports, setArchivedReports] = useState([]);
-  const { token } = useAuth(); // Get token for API calls
 
   // Debug log
   console.log('🎯 AuthenticatedApp trial:', trial);

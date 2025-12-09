@@ -47,10 +47,8 @@ const Register = ({ onNavigateToLogin }) => {
         const { success, error } = await register(userData, companyData, legalData);
         if (!success) {
             alert("Errore registrazione: " + error);
-        } else {
-            // Force reload to bypass aggressive proxy caching and load fresh JS
-            window.location.reload();
         }
+        // No reload needed - AuthContext will update automatically
     };
 
     return (
