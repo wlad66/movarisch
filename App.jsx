@@ -522,15 +522,15 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
                       hCodes_value: hCodes
                     });
                     return (Array.isArray(hCodes) ? hCodes : []).map((h) => (
-                    <div
-                      key={h.code}
-                      onClick={() => toggleHCode(h)}
-                      className={`cursor-pointer p-2 rounded border text-sm flex justify-between items-center transition ${selectedHCodes.find(x => x.code === h.code) ? 'bg-blue-100 border-blue-500' : 'bg-white border-slate-200 hover:bg-slate-100'}`}
-                    >
-                      <span className="font-bold text-blue-800 w-24">{h.code}</span>
-                      <span className="flex-1 truncate">{h.text}</span>
-                      <span className="text-xs bg-slate-200 px-2 py-1 rounded ml-2">Score: {h.score.toFixed(2)}</span>
-                    </div>
+                      <div
+                        key={h.code}
+                        onClick={() => toggleHCode(h)}
+                        className={`cursor-pointer p-2 rounded border text-sm flex justify-between items-center transition ${selectedHCodes.find(x => x.code === h.code) ? 'bg-blue-100 border-blue-500' : 'bg-white border-slate-200 hover:bg-slate-100'}`}
+                      >
+                        <span className="font-bold text-blue-800 w-24">{h.code}</span>
+                        <span className="flex-1 truncate">{h.text}</span>
+                        <span className="text-xs bg-slate-200 px-2 py-1 rounded ml-2">Score: {h.score.toFixed(2)}</span>
+                      </div>
                     ));
                   })()}
                 </div>
@@ -944,11 +944,27 @@ const MoVaRisChContent = ({ savedAssessments, addAssessment }) => {
 
 // --- COMPONENTE PRINCIPALE CON AUTH ---
 const AuthenticatedApp = () => {
-  const { user, logout, company, trial, token } = useAuth();
+  const { user, logout, company, trial, subscription, token } = useAuth();
   const { addToInventory } = useData();
   const [view, setView] = useState('data');
   const [savedAssessments, setSavedAssessments] = useState([]);
   const [archivedReports, setArchivedReports] = useState([]);
+
+  // --- STRICT BLOCKING LOGIC ---
+  const isAccessBlocked = useMemo(() => {
+    // Se è in trial attivo OPPURE ha subscription attiva -> Accesso consentito
+    // Altrimenti -> BLOCCATO
+    const hasActiveTrial = trial && trial.active;
+    const hasActiveSubscription = subscription && subscription.status === 'active';
+    return !hasActiveTrial && !hasActiveSubscription;
+  }, [trial, subscription]);
+
+  useEffect(() => {
+    // Se bloccato, forza redirect a subscription e impedisci altre view
+    if (isAccessBlocked && view !== 'subscription') {
+      setView('subscription');
+    }
+  }, [isAccessBlocked, view]);
 
   // Debug log
   console.log('🎯 AuthenticatedApp trial:', trial);
@@ -1136,7 +1152,20 @@ const AuthenticatedApp = () => {
           <div className="flex items-center gap-3">
             <Activity size={28} className="text-blue-300" />
             <div>
-              <h1 className="text-xl font-bold">MoVaRisCh 2025</h1>
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl font-bold">MoVaRisCh 2025</h1>
+                {/* STATUS BADGE */}
+                {trial && trial.active && (
+                  <span className="bg-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+                    <Activity size={10} /> TRIAL: {trial.daysRemaining}gg
+                  </span>
+                )}
+                {(!trial || !trial.active) && subscription && subscription.status === 'active' && (
+                  <span className="bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+                    <Shield size={10} /> PREMIUM
+                  </span>
+                )}
+              </div>
               <p className="text-xs text-blue-200 opacity-80">
                 {company ? `${company.ragioneSociale}` : 'Modello Valutazione Rischio Chimico'}
               </p>
@@ -1159,26 +1188,30 @@ const AuthenticatedApp = () => {
         {/* Navigation Tabs */}
         <div className="max-w-4xl mx-auto flex gap-1">
           <button
-            onClick={() => setView('calculator')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-t-lg font-medium transition ${view === 'calculator' ? 'bg-slate-50 text-blue-900' : 'text-blue-200 hover:bg-blue-800 hover:text-white'}`}
+            onClick={() => !isAccessBlocked && setView('calculator')}
+            disabled={isAccessBlocked}
+            className={`flex items-center gap-2 px-4 py-2 rounded-t-lg font-medium transition ${view === 'calculator' ? 'bg-slate-50 text-blue-900' : 'text-blue-200 hover:bg-blue-800 hover:text-white'} ${isAccessBlocked ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             <Activity size={16} /> Calcolatore
           </button>
           <button
-            onClick={() => setView('optimizer')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-t-lg font-medium transition ${view === 'optimizer' ? 'bg-slate-50 text-blue-900' : 'text-blue-200 hover:bg-blue-800 hover:text-white'}`}
+            onClick={() => !isAccessBlocked && setView('optimizer')}
+            disabled={isAccessBlocked}
+            className={`flex items-center gap-2 px-4 py-2 rounded-t-lg font-medium transition ${view === 'optimizer' ? 'bg-slate-50 text-blue-900' : 'text-blue-200 hover:bg-blue-800 hover:text-white'} ${isAccessBlocked ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             <Shield size={16} /> Ottimizzatore DPI
           </button>
           <button
-            onClick={() => setView('archive')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-t-lg font-medium transition ${view === 'archive' ? 'bg-slate-50 text-blue-900' : 'text-blue-200 hover:bg-blue-800 hover:text-white'}`}
+            onClick={() => !isAccessBlocked && setView('archive')}
+            disabled={isAccessBlocked}
+            className={`flex items-center gap-2 px-4 py-2 rounded-t-lg font-medium transition ${view === 'archive' ? 'bg-slate-50 text-blue-900' : 'text-blue-200 hover:bg-blue-800 hover:text-white'} ${isAccessBlocked ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             <FileText size={16} /> Archivio
           </button>
           <button
-            onClick={() => setView('data')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-t-lg font-medium transition ${view === 'data' ? 'bg-slate-50 text-blue-900' : 'text-blue-200 hover:bg-blue-800 hover:text-white'}`}
+            onClick={() => !isAccessBlocked && setView('data')}
+            disabled={isAccessBlocked}
+            className={`flex items-center gap-2 px-4 py-2 rounded-t-lg font-medium transition ${view === 'data' ? 'bg-slate-50 text-blue-900' : 'text-blue-200 hover:bg-blue-800 hover:text-white'} ${isAccessBlocked ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             <Database size={16} /> Anagrafiche
           </button>
@@ -1190,13 +1223,6 @@ const AuthenticatedApp = () => {
           </button>
         </div>
       </div>
-
-      {/* Trial Banner */}
-      {trial && (
-        <div className="max-w-4xl mx-auto mt-4 px-4">
-          <TrialBanner trial={trial} onUpgrade={handleUpgrade} />
-        </div>
-      )}
 
       {view === 'calculator' && (
         <MoVaRisChContent savedAssessments={savedAssessments} addAssessment={addAssessment} />
@@ -1211,7 +1237,7 @@ const AuthenticatedApp = () => {
         <DataManagement hCodes={hCodes} />
       )}
       {view === 'subscription' && (
-        <Subscription />
+        <Subscription isBlocked={isAccessBlocked} />
       )}
     </div>
   );

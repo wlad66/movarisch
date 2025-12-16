@@ -1,5 +1,39 @@
 # Changelog MoVaRisCh
 
+## [2.2.0] - 2025-12-09
+
+### 🚀 Critical Fixes (Deploy & Infra)
+
+#### Persistenza Deploy (Nginx Reverse Proxy)
+- **PROBLEMA**: Il sito mostrava versioni vecchie nonostante il deploy, a causa di una misconfigurazione dell'Nginx Host.
+- **FIX**: Aggiornata configurazione Nginx su VPS (`/etc/nginx/sites-enabled/movarisch...`) per usare `proxy_pass http://localhost:8004` invece di servire file statici da cartella obsoleta.
+- **RISULTATO**: Il deploy ora è immediato e consistente.
+
+#### Script di Deploy (`deploy.ps1`)
+- Aggiunto `docker system prune -f` per pulizia aggressiva cache.
+- Aggiunto step di verifica post-deploy (controllo hash `index.html` live).
+- Pulizia preventiva dei file remoti prima dell'upload.
+
+### ✨ Nuove Features & UI
+
+#### Header Status Badge (Sostituzione Banner)
+- **RIMOSSO**: Il `TrialBanner` invasivo sotto l'header.
+- **AGGIUNTO**: Badge di stato discreto nell'intestazione ("MoVaRisCh 2025").
+- **Stati**:
+  - 🟠 **TRIAL**: "TRIAL: X gg" (Arancione)
+  - 🟢 **PREMIUM**: "PREMIUM" (Verde)
+  - 🔴 **SCADUTO**: Indicazione evidente se scaduto.
+
+#### Ottimizzazione Auth
+- Login API ora restituisce immediatamente stato abbonamento/trial.
+- Rimossa la chiamata secondaria `/api/subscription/status` che causava race conditions (errori 403).
+
+### 🐛 Bug Fix
+- Risolto errore 403 al login dovuto a token non ancora pronto.
+- Risolto disallineamento cache browser (Cache-Control headers aggiunti).
+
+---
+
 ## [2.1.0] - 2025-12-07
 
 ### ✨ Nuove Features

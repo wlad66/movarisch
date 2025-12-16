@@ -21,10 +21,17 @@ Copy-Item -Recurse -Force "dist" "server\dist"
 Write-Host "OK Dist copiato" -ForegroundColor Green
 
 # STEP 3: Archivi
-Write-Host "`nSTEP 3: Creazione archivi..." -ForegroundColor Yellow
+Write-Host "`nSTEP 3: Creazione archivi (Backend + Frontend)..." -ForegroundColor Yellow
 if (Test-Path "dist.tar.gz") { Remove-Item "dist.tar.gz" }
-tar -czf dist.tar.gz -C server dist
+# Archive everything in server folder except node_modules
+tar -czf dist.tar.gz -C server --exclude=node_modules .
 Write-Host "OK Archivi creati" -ForegroundColor Green
+
+# STEP 3.5: Remote Cleanup
+Write-Host "`nSTEP 3.5: Pulizia remota preventiva..." -ForegroundColor Yellow
+$cleanCmd = "rm -rf /opt/movarisch-new/server/dist /opt/movarisch-new/dist.tar.gz"
+echo $Password | plink -batch -pw $Password -t "${VpsUser}@${VpsIp}" $cleanCmd
+Write-Host "OK Pulizia completata" -ForegroundColor Green
 
 # STEP 4: Upload
 Write-Host "`nSTEP 4: Upload su VPS..." -ForegroundColor Yellow
@@ -46,9 +53,14 @@ echo $Password | plink -batch -pw $Password -t "${VpsUser}@${VpsIp}" $cmd
 Write-Host "OK Images built" -ForegroundColor Green
 
 # STEP 7: Deploy
-Write-Host "`nSTEP 7: Deploy containers..." -ForegroundColor Yellow
-$cmd = "cd /opt/movarisch-new && docker-compose down && docker-compose up -d --force-recreate && sleep 3 && docker-compose ps"
+Write-Host "`nSTEP 7: Deploy containers (AGGRESSIVE)..." -ForegroundColor Yellow
+$cmd = "cd /opt/movarisch-new && docker-compose down && docker system prune -f && docker-compose up -d --build --force-recreate && sleep 5 && docker-compose ps"
 echo $Password | plink -batch -pw $Password -t "${VpsUser}@${VpsIp}" $cmd
+
+# STEP 8: Verify Deployment
+Write-Host "`nSTEP 8: Verifying Deployment Hash..." -ForegroundColor Yellow
+$verifyCmd = "docker exec movarisch-app grep -o 'v=[0-9]*' /usr/share/nginx/html/index.html | head -1"
+echo $Password | plink -batch -pw $Password -t "${VpsUser}@${VpsIp}" $verifyCmd
 
 Write-Host "`nOK Deploy completato!" -ForegroundColor Green
 

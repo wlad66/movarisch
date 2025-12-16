@@ -1,106 +1,67 @@
 ═══════════════════════════════════════════════════════
-  🚀 COMANDI RAPIDI PER DEPLOY - MoVaRisCh v2.1.0
+  🚀 COMANDI RAPIDI PER DEPLOY - MoVaRisCh (Windows)
 ═══════════════════════════════════════════════════════
 
-📌 OPZIONE 1: DEPLOY AUTOMATICO (CONSIGLIATO)
+📌 METODO STANDARD: SCRIPT AUTOMATIZZATO
 ──────────────────────────────────────────────────────
-cd /c/PROGRAMMAZIONE/movarisch
-./deploy.sh
+Questo è il metodo testato e funzionante per Windows.
 
-(Lo script ti guiderà passo passo)
+1. Apri PowerShell come Amministratore (opzionale, ma meglio)
+2. Vai nella cartella del progetto:
+   cd c:\PROGRAMMAZIONE\movarisch
+
+3. Esegui lo script:
+   .\deploy.ps1
+
+COSA FA LO SCRIPT (v2.2.0):
+1. Build Locale: Compila React (`npm run build`) e aggiorna versioni (`add-version.js`).
+2. Pulitura Remota: Cancella vecchi file dalla VPS per evitare conflitti.
+3. Upload: Carica `dist.tar.gz`, `Dockerfile` e file config tramite `pscp`.
+4. Deploy Remoto:
+   - Ferma i container (`docker-compose down`)
+   - PULIZIA AGGRESSIVA (`docker system prune -f`)
+   - Ricostruisce e avvia (`docker-compose up -d --build --force-recreate`)
+5. Verifica: Stampa l'hash del file `index.html` live per conferma.
 
 
-📌 OPZIONE 2: DEPLOY MANUALE
+📌 METODO MANUALE (SOLO EMERGENZA)
 ──────────────────────────────────────────────────────
+Se `deploy.ps1` fallisce, puoi replicare i passi manualmente:
 
-STEP 1 - Verifica .env non sia tracciato
-─────────────────────────────────────────
-git ls-files | grep .env
+1. Build Locale:
+   npm run build
+   tar -czf dist.tar.gz -C server dist
 
-ATTESO: Nessun output
-SE APPARE .env: FERMARSI! Non committare!
+2. Upload (richiede PuTTY/pscp installato):
+   pscp dist.tar.gz root@72.61.189.136:/opt/movarisch-new/
 
-
-STEP 2 - Commit locale
-─────────────────────────────────────────
-git add .
-git commit -m "v2.1.0 - Export completo, Tipologia d'Uso, Classificazione Rischio"
-
-
-STEP 3 - Push a repository remoto
-─────────────────────────────────────────
-git push origin main
-
-
-STEP 4 - Deploy su VPS (SSH)
-─────────────────────────────────────────
-ssh user@your-vps-ip
-
-cd /path/to/movarisch
-
-git pull origin main
-
-docker-compose -f docker-compose.vps.yml down
-
-docker-compose -f docker-compose.vps.yml up -d --build
-
-docker-compose -f docker-compose.vps.yml logs -f
-
-
-STEP 5 - Verifica
-─────────────────────────────────────────
-Apri browser: http://your-vps-ip:8005
-
-✓ Login funziona
-✓ Step 3 ha "Tipologia d'Uso"
-✓ Step 4 mostra tabella classificazione
-✓ Export Word contiene tutti i dati
+3. Comandi VPS (via SSH):
+   ssh root@72.61.189.136
+   cd /opt/movarisch-new
+   tar -xzf dist.tar.gz -C server/
+   docker-compose down
+   docker system prune -f
+   docker-compose up -d --build --force-recreate
 
 
 ═══════════════════════════════════════════════════════
-  📋 CHECKLIST PRE-DEPLOY
+  📋 CHECKLIST DEBUG DEPLOY
 ═══════════════════════════════════════════════════════
 
-☐ Backend in locale funziona (npm start in /server)
-☐ Frontend in locale funziona (npm run dev)
-☐ Export Word funziona correttamente
-☐ Calcoli rischio corretti
-☐ .env NON è tracciato in git
-☐ Backup database fatto (se modifiche struttura)
+SE LE MODIFICHE NON APPAIONO:
+1. Controlla che `deploy.ps1` abbia finito con "OK Deploy completato!".
+2. Verifica l'hash stampato alla fine dello script.
+3. Incognito Mode: Prova browser in incognito (cache issue).
+4. VPS Nginx: Verifica che `/etc/nginx/sites-enabled/movarisch...` abbia `proxy_pass http://localhost:8004`.
 
-
-═══════════════════════════════════════════════════════
-  🆘 IN CASO DI PROBLEMI
-═══════════════════════════════════════════════════════
-
-Container non si avvia:
-  docker-compose -f docker-compose.vps.yml logs
-
-Modifiche non visibili:
-  docker-compose -f docker-compose.vps.yml build --no-cache
-  docker-compose -f docker-compose.vps.yml up -d
-
-Rollback:
-  git log --oneline -5
-  git reset --hard <hash-precedente>
-  git push --force origin main
-  (poi rifare deploy sul VPS)
-
+SE ERRORE 403 / LOGIN:
+1. Verifica che backend sia su: `docker logs movarisch-backend`
+2. Database: `docker logs movarisch-db`
 
 ═══════════════════════════════════════════════════════
-  📚 DOCUMENTAZIONE
+  ✅ NOTE IMPORTANTI
 ═══════════════════════════════════════════════════════
+- Il database è PERSISTENTE nel volume `movarisch-db-data`.
+- Non eseguire `docker-compose down -v` (perderesti i dati!).
+- La VPS ospita altre app, non toccare container altrui.
 
-Guida completa:      DEPLOY_GUIDE.md
-Modifiche recenti:   CHANGELOG.md
-Documentazione app:  README.md
-
-
-═══════════════════════════════════════════════════════
-  ✅ PRONTO PER IL DEPLOY!
-═══════════════════════════════════════════════════════
-
-Quando sei pronto, esegui:
-  ./deploy.sh
-
-Oppure segui i comandi manuali sopra.

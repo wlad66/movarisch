@@ -90,7 +90,7 @@ async function createCheckout(req, res) {
             return res.status(400).json({ error: 'You already have an active subscription' });
         }
 
-        // Creazione sessione Stripe reale
+        // Crea sessione Stripe Checkout
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
@@ -99,20 +99,15 @@ async function createCheckout(req, res) {
                     quantity: 1,
                 },
             ],
-            mode: 'subscription',
-            success_url: `${process.env.STRIPE_SUCCESS_URL || 'https://movarisch.safetyprosuite.com/subscription/success'}?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: process.env.STRIPE_CANCEL_URL || 'https://movarisch.safetyprosuite.com/subscription',
+            mode: 'payment', // Pagamento one-time (non ricorrente)
+            success_url: `${process.env.STRIPE_SUCCESS_URL}?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: process.env.STRIPE_CANCEL_URL,
             customer_email: user.email,
             client_reference_id: userId.toString(),
             metadata: {
                 userId: userId.toString(),
                 email: user.email,
                 subscriptionType: 'annual'
-            },
-            subscription_data: {
-                metadata: {
-                    userId: userId.toString()
-                }
             }
         });
 
@@ -120,7 +115,6 @@ async function createCheckout(req, res) {
             sessionId: session.id,
             url: session.url
         });
-
     } catch (error) {
         console.error('Create checkout error:', error);
         res.status(500).json({ error: 'Server error' });
@@ -136,9 +130,8 @@ async function webhook(req, res) {
     let event;
 
     try {
-        // Use raw body for signature verification
         event = stripe.webhooks.constructEvent(
-            req.body, // This should be a buffer now thanks to express.raw() in server.js
+            req.body,
             sig,
             process.env.STRIPE_WEBHOOK_SECRET
         );
@@ -162,12 +155,6 @@ async function webhook(req, res) {
                 await handlePaymentFailed(event.data.object);
                 break;
 
-            case 'customer.subscription.deleted':
-            case 'customer.subscription.updated':
-                // Handle subscription updates/cancellations if needed
-                await handleSubscriptionUpdate(event.data.object);
-                break;
-
             default:
                 console.log(`Unhandled event type: ${event.type}`);
         }
@@ -176,33 +163,6 @@ async function webhook(req, res) {
     } catch (error) {
         console.error('Webhook handler error:', error);
         res.status(500).json({ error: 'Webhook handler failed' });
-    }
-}
-
-async function handleSubscriptionUpdate(stripeSubscription) {
-    // Logic to handle subscription updates (e.g. cancellation or renewal)
-    const subscription = await Subscription.findByStripeId(stripeSubscription.id);
-    if (!subscription) return;
-
-    if (stripeSubscription.status === 'canceled') {
-        await Subscription.updateStatus(subscription.id, 'cancelled');
-    } else if (stripeSubscription.status === 'active') {
-        // Could check for renewals here
-        const endDate = new Date(stripeSubscription.current_period_end * 1000);
-        await Subscription.updateWithPayment(subscription.id, {
-            subscriptionStartDate: new Date(stripeSubscription.current_period_start * 1000),
-            subscriptionEndDate: endDate,
-            status: 'active',
-            stripeSubscriptionId: stripeSubscription.id,
-            autoRenew: !stripeSubscription.cancel_at_period_end
-        });
-
-        // Update user record too
-        const pool = require('../config/database');
-        await pool.query(
-            `UPDATE users SET subscription_status = $1, subscription_ends_at = $2 WHERE id = $3`,
-            ['active', endDate, subscription.user_id]
-        );
     }
 }
 

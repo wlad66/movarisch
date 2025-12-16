@@ -8,6 +8,8 @@ export const AuthProvider = ({ children }) => {
     const [trial, setTrial] = useState(null);
     const [subscription, setSubscription] = useState(null);
     const [loading, setLoading] = useState(true);
+    // DEBUG VERSION LOG
+    console.log('🚀 AuthContext v2-fixed loaded');
     const [token, setToken] = useState(() => {
         const storedToken = localStorage.getItem('movarisch_token');
         // Return null instead of the string "null"
@@ -96,11 +98,21 @@ export const AuthProvider = ({ children }) => {
             setCompany(data.company);
             setToken(data.token);
 
+            // Store trial data directly from login response
+            if (data.trial) {
+                setTrial(data.trial);
+            }
+            if (data.subscription) {
+                setSubscription(data.subscription);
+            }
+
             // Salva solo il token in localStorage
             localStorage.setItem('movarisch_token', data.token);
 
-            // Fetch subscription status after login using the fresh token and WAIT
-            await fetchSubscriptionStatus(data.token);
+            // No need to fetch subscription status again, we got it!
+            // But we can do it silently in background if we really wanted to verify, 
+            // but for now, rely on server response.
+            // await fetchSubscriptionStatus(data.token);
 
             return { success: true };
         } catch (error) {

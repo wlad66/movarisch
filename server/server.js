@@ -19,7 +19,15 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+
+// Use JSON parser for all non-webhook routes
+app.use((req, res, next) => {
+    if (req.originalUrl === '/api/subscription/webhook') {
+        next();
+    } else {
+        express.json()(req, res, next);
+    }
+});
 
 // Serve static files from dist folder with proper cache headers
 app.use('/assets', express.static(path.join(__dirname, 'dist/assets'), {
@@ -29,7 +37,8 @@ app.use('/assets', express.static(path.join(__dirname, 'dist/assets'), {
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/subscription', subscriptionRoutes);
+// Mount subscription routes - webhook needs raw body
+app.use('/api/subscription', express.raw({ type: 'application/json' }), subscriptionRoutes);
 app.use('/api/workplaces', workplacesRoutes);
 app.use('/api/roles', rolesRoutes);
 app.use('/api/inventory', inventoryRoutes);
