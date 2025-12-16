@@ -101,29 +101,86 @@ async function login(req, res) {
     try {
         const { email, password } = req.body;
 
+        console.log('🔐 Login attempt for:', email);
+
         if (!email || !password) {
+            console.log('❌ Missing email or password');
             return res.status(400).json({ error: 'Email and password are required' });
         }
 
         // Find user
         const user = await User.findByEmail(email);
         if (!user) {
+            console.log('❌ User not found:', email);
             return res.status(400).json({ error: 'Invalid credentials' });
         }
 
         // Verify password
         const match = await User.verifyPassword(password, user.password);
         if (!match) {
+            console.log('❌ Invalid password for:', email);
             return res.status(400).json({ error: 'Invalid credentials' });
         }
 
+        console.log('✅ User authenticated:', user.id);
+
         const token = generateToken(user);
 
-        res.json({
+        // Fetch subscription details
+        const subscription = await Subscription.findByUserId(user.id);
+        console.log('📊 Subscription found:', subscription ? `ID ${subscription.id}, Status: ${subscription.status}` : 'NONE');
+
+        const isActive = await Subscription.isActive(user.id);
+        const daysRemaining = await Subscription.getDaysRemaining(user.id);
+        console.log('📊 Subscription active:', isActive, 'Days remaining:', daysRemaining);
+
+        let response = {
             token,
             user: User.formatUser(user),
             company: user.company_data || {}
+        };
+
+        if (subscription) {
+            let endDate;
+            if (subscription.status === 'trial') {
+                endDate = subscription.trial_end_date;
+            } else if (subscription.status === 'active') {
+                endDate = subscription.subscription_end_date;
+            }
+
+            // Add trial object if in trial
+            if (subscription.status === 'trial') {
+                response.trial = {
+                    active: isActive,
+                    daysRemaining,
+                    endsAt: endDate
+                };
+                console.log('✅ Trial data added to response:', response.trial);
+            }
+
+            // Add subscription object if active subscription
+            if (subscription.status === 'active') {
+                response.subscription = {
+                    status: 'active',
+                    daysRemaining,
+                    endsAt: endDate,
+                    startsAt: subscription.subscription_start_date,
+                    autoRenew: subscription.auto_renew || false
+                };
+                console.log('✅ Subscription data added to response:', response.subscription);
+            }
+        } else {
+            console.log('⚠️ No subscription found for user:', user.id);
+        }
+
+        console.log('📤 Login response:', {
+            hasUser: !!response.user,
+            hasCompany: !!response.company,
+            hasTrial: !!response.trial,
+            hasSubscription: !!response.subscription
         });
+
+        res.json(response);
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({ error: 'Server error' });

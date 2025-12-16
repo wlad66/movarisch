@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CreditCard, CheckCircle, AlertCircle, Calendar, Euro } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-const Subscription = () => {
+const Subscription = ({ isBlocked }) => {
     const { trial, subscription, fetchSubscriptionStatus } = useAuth();
     const [isProcessing, setIsProcessing] = useState(false);
     const [error, setError] = useState(null);
@@ -23,30 +23,27 @@ const Subscription = () => {
         setSuccess(null);
 
         try {
-            // TODO: Integrate with Stripe payment
-            // For now, we'll create a placeholder that you can replace with Stripe
-            const response = await fetch('/api/subscription/create', {
+            // Create Stripe Checkout session
+            const response = await fetch('/api/subscription/create-checkout', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('movarisch_token')}`
-                },
-                body: JSON.stringify({
-                    plan: 'annual',
-                    amount: 50
-                })
+                }
             });
 
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.error || 'Errore durante la creazione dell\'abbonamento');
+                throw new Error(data.error || 'Errore durante la creazione della sessione di pagamento');
             }
 
-            setSuccess('Abbonamento attivato con successo!');
-
-            // Refresh subscription status
-            await fetchSubscriptionStatus();
+            // Redirect to Stripe Checkout
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                throw new Error('URL di checkout non ricevuto dal server');
+            }
         } catch (err) {
             setError(err.message);
         } finally {
@@ -60,6 +57,20 @@ const Subscription = () => {
 
     return (
         <div className="max-w-4xl mx-auto p-6">
+            {isBlocked && (
+                <div className="bg-red-600 text-white p-6 rounded-lg mb-8 shadow-xl border-4 border-red-800 animate-pulse">
+                    <div className="flex items-center gap-3 mb-2">
+                        <AlertCircle size={32} className="text-white" />
+                        <h2 className="text-2xl font-bold">ACCESSO BLOCCATO</h2>
+                    </div>
+                    <p className="text-lg">
+                        Il tuo periodo di prova o abbonamento è scaduto.
+                        Per continuare ad utilizzare il Calcolatore, l'Archivio e l'Ottimizzatore DPI,
+                        è necessario attivare un abbonamento annuale.
+                    </p>
+                </div>
+            )}
+
             <div className="bg-white rounded-lg shadow-lg p-6">
                 <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
                     <CreditCard size={28} className="text-blue-600" />
@@ -81,29 +92,25 @@ const Subscription = () => {
                             </div>
                         </div>
                     ) : isTrialActive ? (
-                        <div className={`border-2 rounded-lg p-4 flex items-start gap-3 ${
-                            daysRemaining <= 1 ? 'bg-red-50 border-red-200' :
-                            daysRemaining <= 3 ? 'bg-orange-50 border-orange-200' :
-                            'bg-blue-50 border-blue-200'
-                        }`}>
-                            <AlertCircle className={`flex-shrink-0 ${
-                                daysRemaining <= 1 ? 'text-red-600' :
-                                daysRemaining <= 3 ? 'text-orange-600' :
-                                'text-blue-600'
-                            }`} size={24} />
+                        <div className={`border-2 rounded-lg p-4 flex items-start gap-3 ${daysRemaining <= 1 ? 'bg-red-50 border-red-200' :
+                                daysRemaining <= 3 ? 'bg-orange-50 border-orange-200' :
+                                    'bg-blue-50 border-blue-200'
+                            }`}>
+                            <AlertCircle className={`flex-shrink-0 ${daysRemaining <= 1 ? 'text-red-600' :
+                                    daysRemaining <= 3 ? 'text-orange-600' :
+                                        'text-blue-600'
+                                }`} size={24} />
                             <div>
-                                <p className={`font-bold mb-1 ${
-                                    daysRemaining <= 1 ? 'text-red-800' :
-                                    daysRemaining <= 3 ? 'text-orange-800' :
-                                    'text-blue-800'
-                                }`}>
+                                <p className={`font-bold mb-1 ${daysRemaining <= 1 ? 'text-red-800' :
+                                        daysRemaining <= 3 ? 'text-orange-800' :
+                                            'text-blue-800'
+                                    }`}>
                                     Periodo di Prova - {daysRemaining} {daysRemaining === 1 ? 'giorno' : 'giorni'} rimanenti
                                 </p>
-                                <p className={`text-sm ${
-                                    daysRemaining <= 1 ? 'text-red-700' :
-                                    daysRemaining <= 3 ? 'text-orange-700' :
-                                    'text-blue-700'
-                                }`}>
+                                <p className={`text-sm ${daysRemaining <= 1 ? 'text-red-700' :
+                                        daysRemaining <= 3 ? 'text-orange-700' :
+                                            'text-blue-700'
+                                    }`}>
                                     Il periodo di prova scade il {new Date(trial.endsAt).toLocaleDateString('it-IT')}
                                 </p>
                             </div>
